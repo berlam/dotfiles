@@ -1,0 +1,139 @@
+<application>
+  <component name="PropertiesComponent">
+    <property name="log.debug.categories" value="" />
+    <property name="DefaultHtmlDoctype.MigrateToHtml5" value="true" />
+    <property name="DefaultHtmlDoctype.Refreshed" value="1" />
+    <property name="file.colors.enable.non.project" value="Yellow" />
+    <property name="file.colors.enable.tests" value="Green" />
+    <property name="ProjectStructure.SecondLevelElements" value="0.2" />
+    <property name="SingleInspectionProfilePanel.VERTICAL_DIVIDER_PROPORTION" value="0.5" />
+    <property name="SingleInspectionProfilePanel.HORIZONTAL_DIVIDER_PROPORTION" value="0.5" />
+    <property name="Non-Project Files" value="Yellow" />
+    <property name="Tests" value="Green" />
+    <property name="toolwindow.stripes.buttons.info.shown" value="true" />
+    <property name="DeploymentNotificationsComponent.WarnDisplayed.Java7&amp;Windows7FTPIssue" value="true" />
+    <property name="lastTip" value="1" />
+    <property name="ExpandBeforeRunStepsPanel" value="true" />
+    <property name="file.chooser.recent.files" value="$USER_HOME$/Downloads/setting.jar&#10;/home/matthias/Projects/code&#10;/home/matthias/Projects/jReactJs/pom.xml&#10;/opt/gradle/2.8&#10;/home/matthias/Projects/libkeepass/build.gradle&#10;/home/matthias/Projects/libkeepass&#10;/home/matthias/Downloads/tomorrow-theme-master/JetBrains/settings.jar&#10;/home/matthias/Projects/cewe/DeinDesignUploader&#10;/home/matthias/Projects/cewe/settings.xml&#10;/home/matthias/Projects/cewe/externaluploader/pom.xml&#10;/home/matthias/Projects/cewe/xsvg&#10;/home/matthias/Projects/cewe/OPS_coding_conventions_1.10.xml&#10;/home/matthias/Projects/cewe/ops-backend&#10;/home/matthias/Projects/cewe/ips-docker/container_settings_ips.json&#10;/opt/jdk/x64/jdk1.8.0_51&#10;/opt/jdk/x64/jdk1.7.0_79&#10;/home/matthias/Projects/cewe/ips&#10;C:/Go&#10;C:/Users/matthias.berla/Desktop/renke.io&#10;C:/Arbeit/CEWE/xsvg/pom.xml&#10;C:/Arbeit/CEWE/formatSelection_xhtml_25_06_2015.patch&#10;C:/Arbeit/CEWE/formatSelection_25_06_2015.patch&#10;C:/Arbeit/CEWE/formatSelection.patch&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST/recording/0.rcd&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST1&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST3/2015-06-18-15-19-59-958.date&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST2&#10;C:/Users/matthias.berla/.IntelliJIdea14/system/chronon-recordings/2015_06_18_CEWE_TEST2/recording/0.rcd" />
+    <property name="FindSplitterProportion" value="0.25" />
+    <property name="introduce.variable.prefer.statements" value="false" />
+    <property name="test_tree_console_proprtion" value="0.2" />
+    <property name="CommitChangeListDialog.SPLITTER_PROPORTION_2" value="0.7361111" />
+    <property name="CommitChangeListDialog.DETAILS_SHOW_OPTION_" value="false" />
+    <property name="junit_statistics_table_columnsWidth0" value="75" />
+    <property name="junit_statistics_table_columnsOrder0" value="0" />
+    <property name="junit_statistics_table_columnsWidth1" value="75" />
+    <property name="junit_statistics_table_columnsOrder1" value="1" />
+    <property name="junit_statistics_table_columnsWidth2" value="75" />
+    <property name="junit_statistics_table_columnsOrder2" value="2" />
+    <property name="junit_statistics_table_columnsWidth3" value="75" />
+    <property name="junit_statistics_table_columnsOrder3" value="3" />
+    <property name="junit_statistics_table_columnsWidth4" value="75" />
+    <property name="junit_statistics_table_columnsOrder4" value="4" />
+    <property name="junit_statistics_table_columnsWidth5" value="75" />
+    <property name="junit_statistics_table_columnsOrder5" value="5" />
+    <property name="default.storage.format" value=".idea (directory based)" />
+    <property name="FileStructurePopup.narrowDown" value="true" />
+    <property name="KEYMAP" value="prefix&#10;line&#10;paste&#10;navi&#10;caret" />
+    <property name="ChangesViewManager.DETAILS_SPLITTER_PROPORTION" value="0.5" />
+    <property name="settings.code.style.selected.tab.JAVA" value="Wrapping and Braces" />
+    <property name="FileTemplates.CurrentTab" value="Code" />
+    <property name="FileTemplates.SelectedTemplate" value="Catch Statement Body" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
+    <property name="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$1.splitter" value="0.3" />
+    <property name="project.wizard.group" value="org.jetbrains.idea.maven.wizards.MavenModuleBuilder" />
+    <property name="project.wizard.template" value="Maven" />
+    <property name="Copy.OpenInEditor" value="true" />
+    <property name="ProjectStructure.TopLevelElements" value="0.15" />
+    <property name="MoveClass.OpenInEditor" value="true" />
+    <property name="com.intellij.openapi.editor.actions.MultiplePasteAction$1.splitter" value="0.3" />
+    <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Sources" />
+    <property name="RunConfigurable.dividerProportion" value="0.3" />
+    <property name="filter_non_existing" value="false" />
+    <property name="MoveClassWithTarget.OpenInEditor" value="false" />
+    <property name="last.imported.location" value="$USER_HOME$/Projects/code" />
+    <property name="create.project.preferred.importer" value="Maven" />
+    <property name="project.jdk.splitter" value="0.2" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="AppServerDKsEditor.splitterProportion" value="0.3" />
+    <property name="CREATE_FIELD_FROM_PARAMETER_DECLARE_FINAL" value="true" />
+    <property name="run.configuration.delete.ad" value="true" />
+    <property name="com.intellij.openapi.vcs.actions.ShowMessageHistoryAction$1.splitter" value="0.3" />
+    <property name="ColorChooser.RecentColors" value="0-0-255-255,,,54-118-255-255,,,40-123-222-255,,,181-255-0-255,,,51-255-0-255,,,43-43-43-255,,,255-153-0-255,,,255-255-255-255,,,184-184-184-255,,,35-37-38-255,,,9-3-0-255,,,255-0-0-255,,,219-45-32-255,,,247-247-247-255,,,0-128-0-255,,,74-69-67-255,,,235-199-0-255" />
+    <property name="com.intellij.diagnostic.IdeErrorsDialogactiveTab" value="-1" />
+    <property name="PLUGIN_FILTER" value="codegl&#10;codeg&#10;guice&#10;docker&#10;velo" />
+    <property name="settings.code.style.selected.tab.HTML" value="Tabs and Indents" />
+    <property name="debug.configuration.alternate.action.ad" value="true" />
+    <property name="LayoutCode.optimizeImports" value="true" />
+    <property name="LayoutCode.rearrangeEntriesJSPX" value="false" />
+    <property name="LayoutCode.processChangedText" value="false" />
+    <property name="KEYMAP_IN_QUICK_LISTS" value="show color&#10;test rest&#10;ide sc" />
+    <property name="COMMITTED_CHANGES_FILTER_HISTORY" value="svg&#10;mmoeller" />
+    <property name="BEFORE.DISTRACTION.MODE.SHOW_STATUS_BAR" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.SHOW_MAIN_TOOLBAR" value="false" />
+    <property name="BEFORE.DISTRACTION.MODE.SHOW_NAVIGATION_BAR" value="false" />
+    <property name="BEFORE.DISTRACTION.MODE.IS_FOLDING_OUTLINE_SHOWN" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.IS_WHITESPACES_SHOWN" value="false" />
+    <property name="BEFORE.DISTRACTION.MODE.ARE_LINE_NUMBERS_SHOWN" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.IS_RIGHT_MARGIN_SHOWN" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.IS_INDENT_GUIDES_SHOWN" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.SHOW_METHOD_SEPARATORS" value="false" />
+    <property name="BEFORE.DISTRACTION.MODE.HIDE_TOOL_STRIPES" value="true" />
+    <property name="BEFORE.DISTRACTION.MODE.EDITOR_TAB_PLACEMENT" value="1" />
+    <property name="AFTER.DISTRACTION.MODE.SHOW_STATUS_BAR" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.SHOW_MAIN_TOOLBAR" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.SHOW_NAVIGATION_BAR" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.IS_FOLDING_OUTLINE_SHOWN" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.IS_WHITESPACES_SHOWN" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.ARE_LINE_NUMBERS_SHOWN" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.IS_RIGHT_MARGIN_SHOWN" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.IS_INDENT_GUIDES_SHOWN" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.SHOW_METHOD_SEPARATORS" value="false" />
+    <property name="AFTER.DISTRACTION.MODE.HIDE_TOOL_STRIPES" value="true" />
+    <property name="AFTER.DISTRACTION.MODE.EDITOR_TAB_PLACEMENT" value="0" />
+    <property name="run.configuration.alternate.action.ad" value="true" />
+    <property name="last.used.gradle.home" value="/opt/gradle/2.8" />
+    <property name="SpringBeansModulesPanel[0]" value="0.14094433" />
+    <property name="INSPECTION_FILTER_HISTORY" value="instance va&#10;boxing&#10;&quot;New in 13&quot;" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="true" />
+    <property name="MoveFile.OpenInEditor" value="true" />
+    <property name="null.splitter" value="0.3" />
+    <property name="run.configuration.edit.ad" value="true" />
+    <property name="settings.code.style.selected.tab.XML" value="Android" />
+    <property name="ActionMacroConfigurationPanel.SPLITTER_PROPORTION" value="0.5" />
+    <property name="INTENTION_FILTER_HISTORY" value="constant" />
+    <property name="fileTypeChangedCounter" value="2" />
+    <property name="LayoutCode.rearrangeEntriesHTML" value="false" />
+    <property name="LayoutCode.rearrangeEntriesXML" value="false" />
+    <property name="settings.code.style.selected.tab.CSS" value="Tabs and Indents" />
+    <property name="FrameworksFinderRecursivePanel[0]" value="0.13140604" />
+    <property name="FrameworksFinderRecursivePanel[1]" value="0.15151516" />
+    <property name="FrameworksFinderRecursivePanel[2]" value="0.19375" />
+    <property name="JpaViewFrameworkProvider:Module[2]" value="0.17905103" />
+    <property name="FrameworksFinderRecursivePanel[3]" value="0.22271715" />
+    <property name="installation.uid" value="bb4b3852-2759-46d3-8182-dba7c62ffc51" />
+    <property name="FileColorsEnabled" value="true" />
+    <property name="FileColorsForTabsEnabled" value="true" />
+    <property name="FileColorsForProjectViewEnabled" value="true" />
+    <property name="export.settings.path" value="$APPLICATION_CONFIG_DIR$/settings.jar" />
+    <property name="RESTClient.httpMethod" value="GET&#10;POST&#10;PUT&#10;PATCH&#10;DELETE&#10;HEAD&#10;OPTIONS" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
+    <property name="MoveMember.OpenInEditor" value="true" />
+    <property name="Gradle.Splitter.Proportion" value="0.2" />
+    <property name="sm_test_statistics_table_columnsWidth0" value="75" />
+    <property name="sm_test_statistics_table_columnsOrder0" value="0" />
+    <property name="sm_test_statistics_table_columnsWidth1" value="75" />
+    <property name="sm_test_statistics_table_columnsOrder1" value="1" />
+    <property name="sm_test_statistics_table_columnsWidth2" value="75" />
+    <property name="sm_test_statistics_table_columnsOrder2" value="2" />
+    <property name="create.member.preselect.anonymous" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="MavenModuleWizard.inheritGroupId" value="true" />
+    <property name="MavenModuleWizard.inheritVersion" value="true" />
+    <property name="MoveInstance.OpenInEditor" value="true" />
+    <property name="ShowDocumentationInToolWindow" value="false" />
+    <property name="class com.intellij.lang.properties.editor.ResourceBundleEditor.splitter" value="0.5" />
+  </component>
+</application>

@@ -1,0 +1,39 @@
+<application>
+  <component name="PasswordDatabase">
+    <option name="PASSWORDS">
+      <array>
+        <array>
+          <option value="96fba9365539a360b7cfe7cbfa485a435eb41343423e05390ee4e773ffe5e327" />
+          <option value="a95942c3ff810857cc3ec88a5aefb4139e1f5614c557e5da474622d09f025e80" />
+          <option value="e8afa179d0d102f88749c1632b0873a9dbab14876d733f790fb9492c0bbf8d91" />
+          <option value="e86d036dc89ed252627ba61b6023ec0b21cbd58fbbacdbe2b530c4a553903dd8" />
+          <option value="ef0236b9b33a212b6619cd60fd89856dad2efb17f4fa14958d4a5d115862d158" />
+          <option value="fd36b5487a3505dfe0220ebb64719cc1da0cc94239bd4f76324cc0db6db07ec6" />
+          <option value="fec50fd5291849961f8ce906f9a6c556a3ce390acf43a5876d7700fe82ef4b4a" />
+          <option value="0b74196b6259570dd344ab79449e1a81f7b7700c50ab4eb38c6a59932dc7681f" />
+          <option value="38fc08e6db55594724896130fc108b84b6f33db3e61df956f271696c9e351373" />
+          <option value="3eeca57daec68be10ab1daa1ead6d3b776c44071f0bee5595f505bdc44af4a47" />
+          <option value="4ce7442e8edd82aaa338cdf20766ba3d083130ccf50a0f15f9286b8e2e30a019" />
+          <option value="7a94559a3a42d84313e8c4d13b5b5959574d67ac727a3ebef2d25a2db68480d8" />
+        </array>
+        <array>
+          <option value="b0386c8c14fb61c80443568ef5ef39f9" />
+          <option value="865fe12190877bf95d7267debe451924" />
+          <option value="c67fec523a9e973c7d38bc2ab00622cf" />
+          <option value="8962f7731a0b30862b4da5c9d9830a2cc5f5fc1648242d888b16d1668c2dd1ad" />
+          <option value="b0386c8c14fb61c80443568ef5ef39f9" />
+          <option value="c67fec523a9e973c7d38bc2ab00622cf" />
+          <option value="db80d8ce69fb229946a4839dc16341fc" />
+          <option value="1136ffa1dd5765a112a25ef9f6f40c2e" />
+          <option value="aa9ad297c65db422a0e1d1aa78fff7f0" />
+          <option value="b0386c8c14fb61c80443568ef5ef39f9" />
+          <option value="c67fec523a9e973c7d38bc2ab00622cf" />
+          <option value="c67fec523a9e973c7d38bc2ab00622cf" />
+        </array>
+      </array>
+    </option>
+  </component>
+  <component name="SSHConnectionSettings">
+    <successfulAuthentication user="git@bitbucket.org" method="publickey" />
+  </component>
+</application>

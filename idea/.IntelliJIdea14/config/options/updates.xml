@@ -1,0 +1,18 @@
+<application>
+  <component name="UpdatesConfigurable">
+    <knownUpdateChannels>
+      <item value="IDEA12" />
+      <item value="IDEA13.1" />
+      <item value="IDEA_14_EAP" />
+      <item value="IDEA14.1" />
+      <item value="IDEA_14_1_EAP" />
+      <item value="IDEA_15_EAP" />
+      <item value="IDEA_Release" />
+    </knownUpdateChannels>
+    <outdatedPlugins>
+      <item value="ro.redeul.google.go" />
+    </outdatedPlugins>
+    <option name="LAST_BUILD_CHECKED" value="IU-141.1532" />
+    <option name="SECURE_CONNECTION" value="true" />
+  </component>
+</application>

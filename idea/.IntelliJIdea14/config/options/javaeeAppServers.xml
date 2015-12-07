@@ -1,0 +1,36 @@
+<application>
+  <component name="AppserversManager">
+    <ServerDK NAME="JBoss 8.1.0.Final">
+      <option name="SOURCE_INTEGRATION_NAME" value="JBoss Server" />
+      <DATA>
+        <option name="HOME" value="C:\Arbeit\ameda\servers\target\wildfly-8.1.0.Final" />
+      </DATA>
+    </ServerDK>
+    <ServerDK NAME="JBoss 8.1.0.Final Consumer">
+      <option name="SOURCE_INTEGRATION_NAME" value="JBoss Server" />
+      <DATA>
+        <option name="HOME" value="C:\Arbeit\ameda\servers\wildfly-8.1.0-ActiveMQ\wildfly-8.1.0.Final-Consumer" />
+      </DATA>
+    </ServerDK>
+    <LibraryTable>
+      <library name="JBoss 8.1.0.Final">
+        <CLASSES>
+          <root url="jar://C:/Arbeit/ameda/servers/target/wildfly-8.1.0.Final/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar!/" />
+          <root url="jar://C:/Arbeit/ameda/servers/target/wildfly-8.1.0.Final/modules/system/layers/base/javax/servlet/api/main/jboss-servlet-api_3.1_spec-1.0.0.Final.jar!/" />
+          <root url="jar://C:/Arbeit/ameda/servers/target/wildfly-8.1.0.Final/modules/system/layers/base/javax/servlet/jsp/api/main/jboss-jsp-api_2.3_spec-1.0.1.Final.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+      <library name="JBoss 8.1.0.Final Consumer">
+        <CLASSES>
+          <root url="jar://C:/Arbeit/ameda/servers/wildfly-8.1.0-ActiveMQ/wildfly-8.1.0.Final-Consumer/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar!/" />
+          <root url="jar://C:/Arbeit/ameda/servers/wildfly-8.1.0-ActiveMQ/wildfly-8.1.0.Final-Consumer/modules/system/layers/base/javax/servlet/api/main/jboss-servlet-api_3.1_spec-1.0.0.Final.jar!/" />
+          <root url="jar://C:/Arbeit/ameda/servers/wildfly-8.1.0-ActiveMQ/wildfly-8.1.0.Final-Consumer/modules/system/layers/base/javax/servlet/jsp/api/main/jboss-jsp-api_2.3_spec-1.0.1.Final.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </LibraryTable>
+  </component>
+</application>

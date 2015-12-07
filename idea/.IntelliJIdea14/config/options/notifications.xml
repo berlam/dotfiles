@@ -1,0 +1,7 @@
+<application>
+  <component name="NotificationConfiguration">
+    <notification groupId="Eclipse code formatter error" displayType="NONE" shouldLog="false" />
+    <notification groupId="Eclipse code formatter info" displayType="NONE" shouldLog="false" />
+    <notification groupId="Upgrade Subscription Renewal" displayType="NONE" shouldLog="false" />
+  </component>
+</application>

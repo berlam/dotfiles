@@ -1,0 +1,32 @@
+<application>
+  <component name="EclipseCodeFormatterSettings">
+    <option name="settingsList">
+      <list>
+        <Settings>
+          <option name="formatSeletedTextInAllFileTypes" value="false" />
+          <option name="formatter" value="ECLIPSE" />
+          <option name="id" value="1430207676687" />
+          <option name="importOrderConfigFilePath" value="C:/Arbeit/qs-rules/code-imports.importorder" />
+          <option name="name" value="kd_cewe" />
+          <option name="optimizeImports" value="false" />
+          <option name="pathToConfigFileJava" value="$USER_HOME$/Projects/cewe/OPS_coding_conventions_1.10.xml" />
+          <option name="selectedJavaProfile" value="OPS Coding Conventions 1.10" />
+        </Settings>
+        <Settings>
+          <option name="formatSeletedTextInAllFileTypes" value="false" />
+          <option name="formatter" value="ECLIPSE" />
+          <option name="id" value="1430207706851" />
+          <option name="importOrderConfigFilePath" value="C:/Arbeit/qs-rules/code-imports.importorder" />
+          <option name="name" value="kd_iav" />
+          <option name="pathToConfigFileJava" value="C:/Arbeit/CEWE/OPS_coding_conventions_1.10.xml" />
+          <option name="selectedJavaProfile" value="OPS Coding Conventions 1.10" />
+        </Settings>
+        <Settings>
+          <option name="defaultSettings" value="true" />
+          <option name="id" value="1430207732860" />
+          <option name="name" value="default" />
+        </Settings>
+      </list>
+    </option>
+  </component>
+</application>

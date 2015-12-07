@@ -1,0 +1,5 @@
+<list display="Custom_Alt+Circumflex" description="Custom1">
+  <action id="IdeScriptingConsole" />
+  <action id="WebServicesPlugin.CreateRESTClient" />
+  <action id="ShowColorPicker" />
+</list>

@@ -1,0 +1,3 @@
+void should${NAME}() {
+${BODY}
+}

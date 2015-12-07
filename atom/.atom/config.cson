@@ -1,0 +1,27 @@
+"*":
+  "exception-reporting":
+    userId: "49da69a0-3711-6c5d-0d1c-67d8b26b088b"
+  welcome:
+    showOnStartup: false
+  core:
+    disabledPackages: [
+      "metrics"
+    ]
+    themes: [
+      "atom-dark-ui"
+      "base16-syntax"
+    ]
+    audioBeep: false
+    autoHideMenuBar: true
+  editor:
+    invisibles: {}
+    backUpBeforeSaving: true
+    fontFamily: "Fantasque Sans Mono"
+    preferredLineLength: 140
+    lineHeight: 1.3
+    fontSize: 17
+  "one-dark-ui": {}
+  "base16-syntax":
+    scheme: "3024"
+  "atom-beautify":
+    _analyticsUserId: "e8e59587-27e3-4a29-af9c-9983ea33086d"

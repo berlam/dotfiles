@@ -1,0 +1,50 @@
+<application>
+  <component name="EditorSettings">
+    <option name="USE_SOFT_WRAPS" value="" />
+    <option name="STRIP_TRAILING_SPACES" value="Whole" />
+    <option name="IS_ENSURE_NEWLINE_AT_EOF" value="true" />
+    <option name="QUICK_DOC_ON_MOUSE_OVER_DELAY_MS" value="100" />
+    <option name="ARE_LINE_NUMBERS_SHOWN" value="true" />
+    <option name="IS_CAMEL_WORDS" value="true" />
+    <option name="IS_MOUSE_CLICK_SELECTION_HONORS_CAMEL_WORDS" value="false" />
+  </component>
+  <component name="LiveEditOptions" updatePolicy="AUTO" />
+  <component name="TodoConfiguration">
+    <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo\b.*">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <pattern icon="important" useCustomColors="false" case-sensitive="false" pattern="\bfixme\b.*">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo mbe?\b.*">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo matthias.berla\b.*">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <pattern icon="important" useCustomColors="false" case-sensitive="false" pattern="\bfixme mbe?\.*">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <pattern icon="important" useCustomColors="false" case-sensitive="false" pattern="\bfixme matthias.berla\b">
+      <option name="FOREGROUND" value="287bde" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="287bde" />
+    </pattern>
+    <filter name="TODO">
+      <pattern index="4" />
+      <pattern index="2" />
+      <pattern index="3" />
+      <pattern index="5" />
+    </filter>
+  </component>
+</application>

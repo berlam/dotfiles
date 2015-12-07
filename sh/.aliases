@@ -1,0 +1,47 @@
+# interactive shell only
+[ -z "$PS1" ] && return
+
+# set aliases
+alias o=mimeopen
+alias svnpurge='svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs -I{} rm -rf "{}"'
+
+alias history='fc -l 1'
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls --color=tty'
+alias lsa='ls -lah'
+alias po=popd
+alias pu=pushd
+alias rd=rmdir
+
+# git helper to set the author for commits per repo automatically
+# add [user "$SERVICE_NAME"] to the .gitconfig
+git_user_check() {
+	GIT_PATH=$(which -a git | sed -n 2p)
+	while read SERVICE; do
+		if [ -d .git ] && [ -n $("$GIT_PATH" remote -v 2>/dev/null | grep "^origin\b.*$SERVICE.*(push)$" >/dev/null 2>&1) ]; then
+			GIT_USERNAME=$("$GIT_PATH" config "user.$SERVICE.name")
+			if [ -n "$GIT_USERNAME" ]; then
+				"$GIT_PATH" config user.name "$GIT_USERNAME"
+			fi
+			GIT_EMAIL=$("$GIT_PATH" config "user.$SERVICE.email")
+			if [ -n "$GIT_EMAIL" ]; then
+				"$GIT_PATH" config user.email "$GIT_EMAIL"
+			fi
+		fi
+	done <<< $("$GIT_PATH" config -l | egrep "^user\.(\w+)\.(name|email)=.*$" | sed -E "s/^user\.(\w+)\..*$/\1/")
+	"$GIT_PATH" "$@"
+}
+alias git='git_user_check'
+
+# set functions
+restow() {
+	for var in pub prv; do stow -R -v -d $HOME/.setup/$var -t $HOME --no-folding "$@"; done
+}
+unstow() {
+	for var in pub prv; do stow -D -v -d $HOME/.setup/$var -t $HOME --no-folding "$@"; done
+}
+
+#cygwin
+#alias svnpurge='svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs --null cygpath -u -p | xargs -I{} rm -rf "{}"'

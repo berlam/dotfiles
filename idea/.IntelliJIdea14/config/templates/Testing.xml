@@ -1,0 +1,156 @@
+<templateSet group="Testing">
+  <template name="hcsi" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.hamcrest.CoreMatchers.sameInstance($EXPECTED$)));" description="Hamcrest is() sameInstance()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcis" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is($EXPECTED$));" description="Hamcrest is()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcin" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.hasItems($EXPECTED$));" description="Hamcrest hasItems()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcis!" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.hamcrest.CoreMatchers.not($EXPECTED$)));" description="Hamcrest is() not()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="mowh" value="org.mockito.Mockito.when($SELECTION$).$METHOD$" description="Mockito when()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="METHOD" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_DECLARATION" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcsi!" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.hamcrest.CoreMatchers.not(org.hamcrest.CoreMatchers.sameInstance($EXPECTED$))));" description="Hamcrest is() not() sameInstance()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcin!" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.not(org.hamcrest.CoreMatchers.hasItems($EXPECTED$)));" description="Hamcrest not() hasItems()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcnv" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.hamcrest.CoreMatchers.nullValue($EXPECTED$.class)));" description="Hamcrest is() nullValue()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="typeOfVariable(ACTUAL)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcnv!" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.hamcrest.CoreMatchers.notNullValue($EXPECTED$.class)));" description="Hamcrest is() notNullValue()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="typeOfVariable(ACTUAL)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="movt" value="org.mockito.Mockito.verify($UUT$, org.mockito.Mockito.times($TIMES$)).$METHOD$" description="Mockito verify() times()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="UUT" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="TIMES" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="movl" value="org.mockito.Mockito.verify($UUT$, org.mockito.Mockito.atLeast($TIMES$)).$METHOD$" description="Mockito verify() atLeast()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="UUT" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="TIMES" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="movm" value="org.mockito.Mockito.verify($UUT$, org.mockito.Mockito.atMost($TIMES$)).$METHOD$" description="Mockito verify() atMost()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="UUT" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="TIMES" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="mbdd" value="// given  &#10;org.mockito.BDDMockito.given($METHOD$).$METHOD_RETURN$;&#10;&#10;// when&#10;$TYPE$ result = $UUT$;&#10;&#10;// then&#10;org.mockito.BDDMockito.assertThat(result, $EXPECTED$);" description="Mockito Behavior-Driven Development" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="METHOD" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD_RETURN" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="TYPE" expression="rightSideType()" defaultValue="" alwaysStopAt="true" />
+    <variable name="UUT" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="moiz" value="org.mockito.Mockito.verifyZeroInteractions($OBJECTS$);" description="Mockito verifyZeroInteractions()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="OBJECTS" expression="arrayVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="moin" value="org.mockito.Mockito.verifyNoMoreInteractions($OBJECTS$);" description="Mockito verifyNoMoreInteractions()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="OBJECTS" expression="arrayVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="hclt" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.mockito.AdditionalMatchers.lt($EXPECTED$)));" description="Hamcrest Mockito lessThan()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+  <template name="hcgt" value="org.hamcrest.MatcherAssert.assertThat($ACTUAL$, org.hamcrest.CoreMatchers.is(org.mockito.AdditionalMatchers.gt($EXPECTED$)));" description="Hamcrest Mockito is() greaterThan()" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="ACTUAL" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="false" />
+      <option name="COMPLETION" value="false" />
+    </context>
+  </template>
+</templateSet>
