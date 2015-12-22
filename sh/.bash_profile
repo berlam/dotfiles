@@ -1,3 +1,2 @@
-if [ -f "${HOME}/.profile" ] ; then
-  . "${HOME}/.profile"
-fi
+[ -r ~/.profile ] && source ~/.profile
+[ -r ~/.bashrc ] && source ~/.bashrc

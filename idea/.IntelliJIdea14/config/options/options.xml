@@ -36,7 +36,7 @@
     <property name="FileStructurePopup.narrowDown" value="true" />
     <property name="KEYMAP" value="prefix&#10;line&#10;paste&#10;navi&#10;caret" />
     <property name="ChangesViewManager.DETAILS_SPLITTER_PROPORTION" value="0.5" />
-    <property name="settings.code.style.selected.tab.JAVA" value="Wrapping and Braces" />
+    <property name="settings.code.style.selected.tab.JAVA" value="Code Generation" />
     <property name="FileTemplates.CurrentTab" value="Code" />
     <property name="FileTemplates.SelectedTemplate" value="Catch Statement Body" />
     <property name="decompiler.legal.notice.accepted" value="true" />

@@ -1,40 +1,32 @@
-SHELL_BUNDLE="$HOME/.zgen/zgen.zsh"
-if [ ! -s "$SHELL_BUNDLE" ]; then
-	mkdir "$HOME/.zgen"
-	curl "https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh" > $SHELL_BUNDLE
-fi
-source "$SHELL_BUNDLE"
-
+SHELL_INIT_FILE="$HOME/.zgen/zgen.zsh"
+SHELL_INIT_URL="https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh"
+[ ! -s "$SHELL_INIT_FILE" ] && mkdir "$HOME/.zgen" && curl -s -o "$SHELL_INIT_FILE" "$SHELL_INIT_URL"
+[ -r "$SHELL_INIT_FILE" ] && source "$SHELL_INIT_FILE"
 SHELL_COLORS="$HOME/.theme/base16-3024.dark.sh"
-if [ -f "$SHELL_COLORS" ]; then
-	source "$SHELL_COLORS"
-fi
+[ -r "$SHELL_COLORS" ] && source "$SHELL_COLORS"
 
-#Options
-setopt complete_aliases
-setopt inc_append_history
-setopt hist_ignore_dups
+# Options
+setopt complete_aliases inc_append_history hist_ignore_dups
+unsetopt correct
 
-#Configuration
-TERM="xterm-256color"
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
+# Configuration
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zhistory
 
-#PowerLevel9k
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context vi_mode dir vcs)
+if [[ ! $(tty) =~ ^/dev/tty[0-9]*$ ]]; then
+	TERM="xterm-256color"
+	AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
+	# PowerLevel9k
+	POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+	POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
+	POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+	POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode history time)
+fi
 
 # check if there's no init script
 if ! zgen saved; then
 	zgen prezto
-	THEME_DIR="$HOME/.zprezto/modules/prompt/external/powerlevel9k"
-	if [ ! -d "$THEME_DIR" ]; then
-		git clone https://github.com/bhilburn/powerlevel9k.git "$THEME_DIR"
-		ln -s "$THEME_DIR/powerlevel9k.zsh-theme" "$THEME_DIR/../../functions/prompt_powerlevel9k_setup"
-	fi
 	zgen prezto environment
 	zgen prezto terminal
 	zgen prezto editor
@@ -49,10 +41,6 @@ if ! zgen saved; then
 	zgen prezto prompt
 	# save all to init script
 	zgen save
-fi
-
-if [ -f "$HOME/.aliases" ]; then
-	source "$HOME/.aliases"
 fi
 
 export KEYTIMEOUT=1
@@ -76,3 +64,5 @@ bindkey '^w' backward-kill-word
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+[ -r ~/.aliases ] && source ~/.aliases

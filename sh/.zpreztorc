@@ -85,6 +85,11 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
+THEME_DIR="$HOME/.zprezto/modules/prompt/external/powerlevel9k"
+if [ ! -d "$THEME_DIR" ]; then
+	git clone https://github.com/bhilburn/powerlevel9k.git "$THEME_DIR"
+	ln -s "$THEME_DIR/powerlevel9k.zsh-theme" "$THEME_DIR/../../functions/prompt_powerlevel9k_setup"
+fi
 zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 
 #

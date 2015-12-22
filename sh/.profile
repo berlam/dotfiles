@@ -6,23 +6,24 @@
 
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
+
+# reminder (http://unix.stackexchange.com/a/46856/148427):
+# 1. interactive login shell (profile)
+#    - text console (tty)
+#    - SSH
+#    - "su -"
+# 2. non-interactive login shell (profile)
+#    - very rare
+#    - X (with display manager)
+# 3. interactive non-login shell (bashrc, zshrc)
+#    - screen
+#    - X terminal
+#    - Emacs terminal buffer
+#    - a shell inside another
+# 4. non-interactive non-login shell
+#    - shell runs a script
+#    - command passed on its command line
 umask 022
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-# if running zsh
-if [ -n "$ZSH_VERSION" ]; then
-    # include .zshrc if it exists
-    if [ -f "$HOME/.zshrc" ]; then
-        . "$HOME/.zshrc"
-    fi  
-fi
 
 ### Desktop
 export LANG="en_US.UTF-8"

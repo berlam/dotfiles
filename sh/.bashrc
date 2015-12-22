@@ -9,10 +9,6 @@
 
 # ~/.bashrc: executed by bash(1) for interactive shells.
 
-if [ -f "$HOME/.aliases" ]; then
-   . "$HOME/.aliases"
-fi
-
 # The latest version as installed by the Cygwin Setup program can
 # always be found at /etc/defaults/etc/skel/.bashrc
 
@@ -200,3 +196,5 @@ fi
 # }
 # 
 # alias cd=cd_func
+
+[ -r ~/.aliases ] && source ~/.aliases
