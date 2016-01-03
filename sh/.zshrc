@@ -1,9 +1,9 @@
 SHELL_INIT_FILE="$HOME/.zgen/zgen.zsh"
 SHELL_INIT_URL="https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh"
 [ ! -s "$SHELL_INIT_FILE" ] && mkdir "$HOME/.zgen" && curl -s -o "$SHELL_INIT_FILE" "$SHELL_INIT_URL"
-[ -r "$SHELL_INIT_FILE" ] && source "$SHELL_INIT_FILE"
+[ -r "$SHELL_INIT_FILE" ] && . "$SHELL_INIT_FILE"
 SHELL_COLORS="$HOME/.theme/base16-3024.dark.sh"
-[ -r "$SHELL_COLORS" ] && source "$SHELL_COLORS"
+[ -r "$SHELL_COLORS" ] && . "$SHELL_COLORS"
 
 # Options
 setopt complete_aliases inc_append_history hist_ignore_dups
@@ -65,4 +65,4 @@ bindkey '^w' backward-kill-word
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-[ -r ~/.aliases ] && source ~/.aliases
+[ -r ~/.aliases ] && . ~/.aliases

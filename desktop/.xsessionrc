@@ -1,2 +1,2 @@
-[ -r ~/.bash_profile ] && source ~/.bash_profile
-[ -r ~/.Xmodmap ] && source ~/.Xmodmap
+[ -r ~/.profile ] && . ~/.profile
+[ -r ~/.Xmodmap ] && . ~/.Xmodmap
