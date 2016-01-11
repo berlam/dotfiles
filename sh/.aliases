@@ -14,9 +14,9 @@ alias po=popd
 alias pu=pushd
 alias rd=rmdir
 
-# git helper to set the author for commits per repo automatically
+# git wrapper to set the author for commits per repo automatically
 # add [user "$SERVICE_NAME"] to the .gitconfig
-_git_user_check() {
+_git_wrapper() {
 	GIT_PATH=$(which -a git | sed -n 2p)
 	while read SERVICE; do
 		if [ -d .git ] && [ -n $("$GIT_PATH" remote -v 2>/dev/null | grep "^origin\b.*$SERVICE.*(push)$" >/dev/null 2>&1) ]; then
@@ -32,15 +32,27 @@ _git_user_check() {
 	done <<< $("$GIT_PATH" config -l | egrep "^user\.(\w+)\.(name|email)=.*$" | sed -E "s/^user\.(\w+)\..*$/\1/")
 	"$GIT_PATH" "$@"
 }
-alias git='_git_user_check'
+alias git='_git_wrapper'
 
-# set functions
+# stow wrapper
+_stow_wrapper() {
+	STOW_METHOD="$1"
+	shift
+	for REPO in pub prv; do
+		REPO_PATH="$HOME/.setup/$REPO"
+		for PACKAGE in "$@"; do
+			[ -d "$REPO_PATH/$PACKAGE" ] && stow -v "$STOW_METHOD" -d "$REPO_PATH" -t "$HOME" --no-folding "$PACKAGE"
+		done
+	done
+}
 restow() {
-	for var in pub prv; do stow -R -v -d $HOME/.setup/$var -t $HOME --no-folding "$@"; done
+	_stow_wrapper -R "$@"
 }
 unstow() {
-	for var in pub prv; do stow -D -v -d $HOME/.setup/$var -t $HOME --no-folding "$@"; done
+	_stow_wrapper -D "$@"
 }
+
+# purge helper
 purge() {
 	case "$@" in
 		apt|dpkg)
@@ -51,7 +63,11 @@ purge() {
 			git reset --hard
 		;;
 		svn)
-			svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs -I{} rm -rf "{}"
+			if [ $(command -v cygpath >/dev/null) ]; then
+				svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs --null cygpath -u -p | xargs -I{} rm -rf "{}"
+			else
+				svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs -I{} rm -rf "{}"
+			fi
 		;;
 		docker)
 			docker stop `docker ps -a -q`
@@ -61,6 +77,3 @@ purge() {
 		;;
 	esac
 }
-
-#cygwin
-#alias svnpurge='svn status --no-ignore | grep "^[?I]" | sed -r "s/^[?I]\s+//" | xargs --null cygpath -u -p | xargs -I{} rm -rf "{}"'

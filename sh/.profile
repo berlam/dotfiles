@@ -51,7 +51,8 @@ export LESSHISTFILE=/dev/null
 ### Dev
 # Go
 export GOROOT=/opt/golang/1.5.1
-export GOPATH=$HOME/Projects/.go
+export GOPATH=$HOME/.golang:$HOME/Projects
+export GOBIN=$HOME/.golang/bin
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
 export JAVA_HOME=/opt/jdk/x64/jdk1.7.0_79
@@ -59,4 +60,4 @@ export IDEA_JDK=/opt/jdk/tux
 export M2_HOME=/opt/apache/maven/3.0.5
 
 ### PATH
-export PATH=$PATH:$GOROOT/bin:$JAVA_HOME/bin:$M2_HOME/bin
+export PATH=$PATH:$GOROOT/bin:$JAVA_HOME/bin:$M2_HOME/bin:$GOBIN
