@@ -14,6 +14,7 @@ Plugin 'fatih/vim-go'
 Plugin 'vim-scripts/AutoClose'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'Blackrush/vim-gocode'
 ""Plugin 'Shougo/neocomplete.vim'
 "All of the Plugins must be added before the following line
 call vundle#end()    
