@@ -1,2 +1,2 @@
 [ -r ~/.profile ] && . ~/.profile
-[ -r ~/.Xmodmap ] && . ~/.Xmodmap
+[ -r ~/.Xmodmap ] && xmodmap ~/.Xmodmap
