@@ -821,7 +821,13 @@ end)
 client.connect_signal("property::fullscreen", function(c)
 	mytopwibox[c.screen].ontop = not c.fullscreen
 	mybotwibox[c.screen].ontop = not c.fullscreen
-	os.execute("xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T")
+	-- Toggle power save functionality and blanking
+	if (c.fullscreen) then
+		os.execute("xset s off && xset -dpms && xset s noblank")
+	else
+		os.execute("xset s on && xset +dpms && xset s blank")
+	end
+	--os.execute("xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T")
 end)
 
 -- Autostart
