@@ -65,4 +65,12 @@ bindkey '^w' backward-kill-word
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# find new commands automatically
+zstyle ':completion:*' rehash true
+
+# Reset prompt, on window resize
+TRAPWINCH () {
+	zle reset-prompt
+}
+
 [ -r ~/.aliases ] && . ~/.aliases
