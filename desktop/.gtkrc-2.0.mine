@@ -2,3 +2,4 @@ gtk-xft-antialias=1
 gtk-xft-hinting=0
 gtk-xft-hintstyle="none"
 gtk-xft-rgba="rgb"
+gtk-can-change-accels=1

@@ -1,0 +1,3 @@
+[submodule "desktop/.config/awesome/awesome-switcher-preview"]
+	path = desktop/.config/awesome/awesome-switcher-preview
+	url = ssh://github.com/berlam/awesome-switcher-preview

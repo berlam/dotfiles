@@ -1,7 +1,0 @@
-<application>
-  <component name="TerminalOptionsProvider">
-    <option name="myShellPath" value="" />
-    <option name="myTabName" value="" />
-    <option name="myOverrideIdeShortcuts" value="false" />
-  </component>
-</application>

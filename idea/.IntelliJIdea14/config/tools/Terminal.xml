@@ -1,9 +1,0 @@
-<toolSet name="Terminal">
-  <tool name="mintty" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="false" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="false">
-    <exec>
-      <option name="COMMAND" value="C:\cygwin64\bin\mintty.exe" />
-      <option name="PARAMETERS" value="-w max /bin/sh -lc &quot;cd `cygpath '$ProjectFileDir$'`; exec bash;&quot;" />
-      <option name="WORKING_DIRECTORY" value="C:/cygwin64/bin" />
-    </exec>
-  </tool>
-</toolSet>

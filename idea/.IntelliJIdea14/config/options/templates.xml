@@ -12,6 +12,18 @@
           <option name="key" value="tldFunction" />
         </TemplateKey>
         <TemplateKey>
+          <option name="groupName" value="struts" />
+          <option name="key" value="act" />
+        </TemplateKey>
+        <TemplateKey>
+          <option name="groupName" value="struts" />
+          <option name="key" value="fb" />
+        </TemplateKey>
+        <TemplateKey>
+          <option name="groupName" value="struts" />
+          <option name="key" value="gf" />
+        </TemplateKey>
+        <TemplateKey>
           <option name="groupName" value="spring" />
           <option name="key" value="sb" />
         </TemplateKey>

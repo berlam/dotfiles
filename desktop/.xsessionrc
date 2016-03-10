@@ -1,2 +1,4 @@
 [ -r ~/.profile ] && . ~/.profile
 [ -r ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+#Disable touchpad
+xinput set-prop 12 285 1

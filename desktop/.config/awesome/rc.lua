@@ -8,7 +8,9 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local drop      = require("scratchdrop")
 local lain      = require("lain")
-local alttab    = require("alttab")
+local alttab    = require("awesome-switcher-preview")
+local awfs      = require("awesome-fullscreen")
+require("awesome-remember-geometry")
 -- }}}
 
 -- {{{ Error handling
@@ -38,8 +40,8 @@ end
 
 -- {{{ Autostart applications
 function run_once(cmd)
-	findme = cmd
-	firstspace = cmd:find(" ")
+	local findme = cmd
+	local firstspace = cmd:find(" ")
 	if firstspace then
 		findme = cmd:sub(0, firstspace-1)
 	end
@@ -54,7 +56,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-darker/t
 
 -- alttab
 function hex2rgba(hex)
-	hex = hex:gsub("#","")
+	local hex = hex:gsub("#","")
 	return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6)), 1
 end
 alttab.settings.preview_box_bg = beautiful.border_focus .. "AA"
@@ -130,7 +132,7 @@ mytextclock = lain.widgets.abase({
 			 })
 
 -- calendar
-lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
+lain.widgets.calendar:attach(mytextclock, { font = beautiful.font_name, font_size = 10 })
 
 -- MEM
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
@@ -317,9 +319,15 @@ awful.client.focus.byidx(-1)
 if client.focus then client.focus:raise() end
 end))
 
+-- awfs
+awfs.callback = function(screen, ontop) 
+	mytopwibox[screen].ontop = ontop
+	mybotwibox[screen].ontop = ontop
+end
+
 -- helper function to refresh maximized clients when wibox (dis)appears
 local function refreshScreen (screen, visible, wibox)
-	local clients = awful.client.visible(screen)
+	local clients = awful.tag.selected(screen):clients()
 	if #clients > 1 == visible then
 		wibox[screen].visible = visible
 	end
@@ -336,7 +344,6 @@ local function refreshScreen (screen, visible, wibox)
 		end
 	end
 end
-
 
 for s = 1, screen.count() do
 
@@ -357,14 +364,21 @@ for s = 1, screen.count() do
 	-- Create a tasklist widget
 	myfocusedtask[s] = awful.widget.tasklist(s,
 					  function(c, screen)
-						  local clients = awful.client.visible(screen)
-						  return awful.widget.tasklist.filter.focused(c, screen) or (#clients == 1 and awful.widget.tasklist.filter.currenttags(c, screen)) 
+						  if awful.widget.tasklist.filter.currenttags(c, screen) then
+							  if #awful.client.visible(screen) == 1 and not c.minimized then
+								  return true
+							  end
+							  if awful.widget.tasklist.filter.minimizedcurrenttags(c, screen) then
+								  return false
+							  end
+							  return awful.widget.tasklist.filter.focused(c, screen)  
+						  end
+						  return false
 					  end, mytasklist.buttons)
 	mytasklist[s] = awful.widget.tasklist(s, 
 					  function (c, screen)
 						  return not awful.widget.tasklist.filter.focused(c, screen) and awful.widget.tasklist.filter.currenttags(c, screen)
-					  end,
-					  mytasklist.buttons)
+					  end, mytasklist.buttons)
 
 	-- Create the top wibox
 	mytopwibox[s] = awful.wibox({ position = "top", ontop = true, screen = s, height = 18 })
@@ -510,10 +524,14 @@ globalkeys = awful.util.table.join(
 	awful.key({ modkey,           }, "Tab",
 	   function ()
 		   awful.tag.viewnext(s)
+		   refreshScreen(mouse.screen, false, mybotwibox)
+		   refreshScreen(mouse.screen, true, mybotwibox)
 	   end),
 	awful.key({ modkey, "Shift"   }, "Tab",
 	   function ()
 		   awful.tag.viewprev(s)
+		   refreshScreen(c.screen, false, mybotwibox)
+		   refreshScreen(c.screen, true, mybotwibox)
 	   end),
 	awful.key({ altkey,           }, "Tab",
 	   function ()
@@ -557,7 +575,7 @@ globalkeys = awful.util.table.join(
 	--[[
 	awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
 	awful.key({ altkey,           }, "h",      function () fswidget.show(7) end),
---]]
+	--]]
 	-- ALSA volume control
 	awful.key({ }, "#123",
 	   function ()
@@ -648,8 +666,7 @@ clientkeys = awful.util.table.join(
 	   end),
 	awful.key({ modkey,           }, "Up",
 	   function (c)
-		   c.maximized_horizontal = not c.maximized_horizontal
-		   c.maximized_vertical   = not c.maximized_vertical
+		   c:emit_signal("maximize")
 	   end)
 )
 
@@ -756,6 +773,10 @@ client.connect_signal("unmanage", function(c)
 end)
 
 -- No border for maximized clients
+client.connect_signal("property::maximized", function(c)
+	c.border_width = c.maximized and 0 or beautiful.border_width
+end)
+-- Different border for focused and unfocused windows
 client.connect_signal("focus", function(c)
 	if c.maximized_horizontal == true and c.maximized_vertical == true then
 		c.border_color = beautiful.border_normal
@@ -763,7 +784,9 @@ client.connect_signal("focus", function(c)
 		c.border_color = beautiful.border_focus
 	end
 end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("unfocus", function(c)
+	c.border_color = beautiful.border_normal
+end)
 -- }}}
 
 -- {{{ Arrange signal handler
@@ -787,48 +810,6 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
 end)
 end
 -- }}}
-
--- {{{ Remember client size when switching between floating and tiling.
-floatgeoms = {}
-
-tag.connect_signal("property::layout", function(t)
-	for k, c in ipairs(t:clients()) do
-		if ((awful.layout.get(mouse.screen) == awful.layout.suit.floating) or (awful.client.floating.get(c) == true)) then
-			c:geometry(floatgeoms[c.window])
-		end
-	end
-end)
-
-client.connect_signal("unmanage", function(c) 
-floatgeoms[c.window] = nil
-end)
-
-client.connect_signal("property::geometry", function(c)
-if ((awful.layout.get(mouse.screen) == awful.layout.suit.floating) or (awful.client.floating.get(c) == true)) then
-	floatgeoms[c.window] = c:geometry()
-end
-end)
-
-
-client.connect_signal("manage", function(c)
-if ((awful.layout.get(mouse.screen) == awful.layout.suit.floating) or (awful.client.floating.get(c) == true)) then
-	floatgeoms[c.window] = c:geometry()
-end
-end)
--- }}}
-
--- {{{ Make fullscreen clients ontop
-client.connect_signal("property::fullscreen", function(c)
-	mytopwibox[c.screen].ontop = not c.fullscreen
-	mybotwibox[c.screen].ontop = not c.fullscreen
-	-- Toggle power save functionality and blanking
-	if (c.fullscreen) then
-		os.execute("xset s off && xset -dpms && xset s noblank")
-	else
-		os.execute("xset s on && xset +dpms && xset s blank")
-	end
-	--os.execute("xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T")
-end)
 
 -- Autostart
 run_once("cmst -m")

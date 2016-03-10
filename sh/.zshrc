@@ -1,3 +1,13 @@
+if [[ ! $(tty) =~ ^/dev/tty[0-9]*$ ]]; then
+	TERM="xterm-256color"
+	AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
+	# PowerLevel9k
+	POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+	POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
+	POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+	POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode history time)
+fi
+
 SHELL_INIT_FILE="$HOME/.zgen/zgen.zsh"
 SHELL_INIT_URL="https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh"
 [ ! -s "$SHELL_INIT_FILE" ] && mkdir "$HOME/.zgen" && curl -s -o "$SHELL_INIT_FILE" "$SHELL_INIT_URL"
@@ -13,16 +23,6 @@ unsetopt correct
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zhistory
-
-if [[ ! $(tty) =~ ^/dev/tty[0-9]*$ ]]; then
-	TERM="xterm-256color"
-	AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
-	# PowerLevel9k
-	POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-	POWERLEVEL9K_SHORTEN_DIR_LENGTH=5
-	POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-	POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode history time)
-fi
 
 # check if there's no init script
 if ! zgen saved; then

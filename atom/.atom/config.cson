@@ -1,9 +1,12 @@
 "*":
-  "exception-reporting":
-    userId: "49da69a0-3711-6c5d-0d1c-67d8b26b088b"
-  welcome:
-    showOnStartup: false
+  "atom-beautify":
+    _analyticsUserId: "e8e59587-27e3-4a29-af9c-9983ea33086d"
+    analytics: false
+  "base16-syntax":
+    scheme: "3024"
   core:
+    audioBeep: false
+    autoHideMenuBar: true
     disabledPackages: [
       "metrics"
     ]
@@ -11,17 +14,28 @@
       "atom-dark-ui"
       "base16-syntax"
     ]
-    audioBeep: false
-    autoHideMenuBar: true
   editor:
-    invisibles: {}
     backUpBeforeSaving: true
     fontFamily: "Fantasque Sans Mono"
-    preferredLineLength: 140
-    lineHeight: 1.3
     fontSize: 17
+    invisibles: {}
+    lineHeight: 1.3
+    preferredLineLength: 140
+  emmet: {}
+  "exception-reporting":
+    userId: "49da69a0-3711-6c5d-0d1c-67d8b26b088b"
+  "go-plus":
+    suppressBuiltinAutocompleteProvider: false
+  "highlight-selected": {}
+  linter: {}
+  "linter-golinter": {}
+  "markdown-preview": {}
   "one-dark-ui": {}
-  "base16-syntax":
-    scheme: "3024"
-  "atom-beautify":
-    _analyticsUserId: "e8e59587-27e3-4a29-af9c-9983ea33086d"
+  "open-file-in": {}
+  pigments: {}
+  "todo-show": {}
+  welcome:
+    showOnStartup: false
+".lua.source":
+  editor:
+    preferredLineLength: 140
