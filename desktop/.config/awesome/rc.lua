@@ -8,7 +8,7 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local drop      = require("scratchdrop")
 local lain      = require("lain")
-local alttab    = require("awesome-switcher-preview")
+local switcher  = require("awesome-switcher-preview")
 local awfs      = require("awesome-fullscreen")
 require("awesome-remember-geometry")
 -- }}}
@@ -54,17 +54,17 @@ end
 -- beautiful init
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-darker/theme.lua")
 
--- alttab
+-- switcher
 function hex2rgba(hex)
 	local hex = hex:gsub("#","")
 	return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6)), 1
 end
-alttab.settings.preview_box_bg = beautiful.border_focus .. "AA"
-alttab.settings.preview_box_border = beautiful.bg_focus .. "00"
-alttab.settings.preview_box_delay = 0
-alttab.settings.preview_box_title_font = beautiful.font_name
-alttab.settings.preview_box_title_font_size_factor = 1
-alttab.settings.preview_box_title_color = {hex2rgba(beautiful.fg_focus)}
+switcher.settings.preview_box_bg = beautiful.border_focus .. "AA"
+switcher.settings.preview_box_border = beautiful.bg_focus .. "00"
+switcher.settings.preview_box_delay = 0
+switcher.settings.preview_box_title_font = {beautiful.font_name}
+switcher.settings.preview_box_title_font_size_factor = 1
+switcher.settings.preview_box_title_color = {hex2rgba(beautiful.fg_focus)}
 
 -- common
 modkey     = "Mod4"
@@ -540,7 +540,7 @@ globalkeys = awful.util.table.join(
 		   awful.client.focus.byidx(0, awful.client.getmaster())
 		   if client.focus then client.focus:raise() end
 		   ]]
-		   alttab.switch(1, "Alt_L", "Tab", "ISO_Left_Tab")
+		   switcher.switch(1, "Alt_L", "Tab", "ISO_Left_Tab")
 	   end),
 	awful.key({ altkey, "Shift"   }, "Tab",
 	   function ()
@@ -549,7 +549,7 @@ globalkeys = awful.util.table.join(
 		   awful.client.focus.byidx(0, awful.client.getmaster())
 		   if client.focus then client.focus:raise() end
 		   ]]
-		   alttab.switch(-1, "Alt_L", "Tab", "ISO_Left_Tab")
+		   switcher.switch(-1, "Alt_L", "Tab", "ISO_Left_Tab")
 	   end),
 	--[[
 	awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
