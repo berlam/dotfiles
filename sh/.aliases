@@ -18,18 +18,20 @@ alias rd=rmdir
 # add [user "$SERVICE_NAME"] to the .gitconfig
 _git_wrapper() {
 	GIT_PATH=$(which -a git | sed -n 2p)
-	while read SERVICE; do
-		if [ -d .git ] && [ -n $("$GIT_PATH" remote -v 2>/dev/null | grep "^origin\b.*$SERVICE.*(push)$" >/dev/null 2>&1) ]; then
-			GIT_USERNAME=$("$GIT_PATH" config "user.$SERVICE.name")
-			if [ -n "$GIT_USERNAME" ]; then
-				"$GIT_PATH" config user.name "$GIT_USERNAME"
+	if [ $("$GIT_PATH" rev-parse --is-inside-work-tree) ]; then
+		while read SERVICE; do
+			if [ -n $("$GIT_PATH" remote -v 2>/dev/null | grep "^origin\b.*$SERVICE.*(push)$" >/dev/null 2>&1) ]; then
+				GIT_USERNAME=$("$GIT_PATH" config "user.$SERVICE.name")
+				if [ -n "$GIT_USERNAME" ]; then
+					"$GIT_PATH" config user.name "$GIT_USERNAME"
+				fi
+				GIT_EMAIL=$("$GIT_PATH" config "user.$SERVICE.email")
+				if [ -n "$GIT_EMAIL" ]; then
+					"$GIT_PATH" config user.email "$GIT_EMAIL"
+				fi
 			fi
-			GIT_EMAIL=$("$GIT_PATH" config "user.$SERVICE.email")
-			if [ -n "$GIT_EMAIL" ]; then
-				"$GIT_PATH" config user.email "$GIT_EMAIL"
-			fi
-		fi
-	done <<< $("$GIT_PATH" config -l | egrep "^user\.(\w+)\.(name|email)=.*$" | sed -E "s/^user\.(\w+)\..*$/\1/")
+		done <<< $("$GIT_PATH" config -l | egrep "^user\.(\w+)\.(name|email)=.*$" | sed -E "s/^user\.(\w+)\..*$/\1/")
+	fi
 	"$GIT_PATH" "$@"
 }
 alias git='_git_wrapper'
