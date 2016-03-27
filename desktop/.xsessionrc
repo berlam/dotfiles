@@ -1,4 +1,15 @@
+#!/bin/sh
 [ -r ~/.profile ] && . ~/.profile
+[ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
 [ -r ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 #Disable touchpad
-xinput set-prop 12 285 1
+#xinput set-prop 10 137 0
+synclient touchpadoff=1
+#Faster mouse for HiDPI
+SCREEN_HEIGHT=`xdpyinfo | egrep -o "dimensions:[[:space:]]+[[:digit:]]+x" | egrep -o "[[:digit:]]+"`
+if [ "$SCREEN_HEIGHT" -gt 1920 ]; then
+	TRACKPOINT_DEVICE=`xinput --list | grep -i trackpoint | egrep -o "id=[[:digit:]]+" | egrep -o "[[:digit:]]+"`
+	TRACKPOINT_PROP=`xinput list-props "$TRACKPOINT_DEVICE" | grep -i "Device Accel Constant Deceleration" | egrep -o "\([[:digit:]]+\)" | egrep -o "[[:digit:]]+"`
+	xinput set-prop "$TRACKPOINT_DEVICE" "$TRACKPOINT_PROP" .25
+	xrandr --dpi 144
+fi
