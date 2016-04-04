@@ -13,6 +13,14 @@ local awfs      = require("awesome-fullscreen")
 require("awesome-remember-geometry")
 -- }}}
 
+-- {{{ Set DPI for awesome 3.5
+local xdpi = tonumber(awful.util.pread("xrdb -query | grep dpi | egrep -o '[[:digit:]]+' | head -1"))
+require("lgi").PangoCairo.FontMap.get_default():set_resolution(xdpi)
+function dpi(size)
+	return math.ceil(size / 96 * xdpi)
+end
+-- }}}
+
 -- {{{ Error handling
 if awesome.startup_errors then
 	naughty.notify({
@@ -111,8 +119,12 @@ end
 -- }}}
 
 -- {{{ Menu
-mymainmenu = awful.menu.new({ items = require("menugen").build_menu(),
-			    theme = { height = 16, width = 130 }})
+mymainmenu = awful.menu.new(
+	{
+		items = require("menugen").build_menu(),
+		theme = { height = dpi(16), width = dpi(130) }
+	}
+)
 -- }}}
 
 -- {{{ Wibox
@@ -123,144 +135,158 @@ separators = lain.util.separators
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
 mytextclock = awful.widget.textclock(" %a %d %b  %H:%M")
 
-mytextclock = lain.widgets.abase({
-				 timeout  = 60,
-				 cmd      = "date +'%a %d %b %R'",
-				 settings = function()
-					 widget:set_text(" " .. output)
-				 end
-			 })
+mytextclock = lain.widgets.abase(
+	{
+		timeout  = 60,
+		cmd      = "date +'%a %d %b %R'",
+		settings = function()
+			widget:set_text(" " .. output)
+		end
+	}
+)
 
 -- calendar
 lain.widgets.calendar:attach(mytextclock, { font = beautiful.font_name, font_size = 10 })
 
 -- MEM
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
-memwidget = lain.widgets.mem({
-			     settings = function()
-				     widget:set_text(" " .. string.format("%5d", mem_now.used) .. "MB ")
-			     end
-		     })
+memwidget = lain.widgets.mem(
+	{
+		settings = function()
+			widget:set_text(" " .. string.format("%5d", mem_now.used) .. "MB ")
+		end
+	}
+)
 
 -- CPU
 cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
 cpubar = awful.widget.progressbar()
 cpubar:set_color(beautiful.fg_normal)
-cpubar:set_width(55)
+cpubar:set_width(dpi(55))
 cpubar:set_ticks(true)
-cpubar:set_ticks_size(6)
+cpubar:set_ticks_size(dpi(6))
 cpubar:set_background_color(beautiful.bg_normal)
-cpumargin = wibox.layout.margin(cpubar, 2, 7)
-cpumargin:set_top(6)
-cpumargin:set_bottom(6)
-cpuupd = lain.widgets.cpu({
-			  settings = function()
-				  cpu_usage = tonumber(cpu_now.usage)
-				  if cpu_usage >= 98 then
-					  cpubar:set_color(red)
-				  elseif cpu_usage > 50 then
-					  cpubar:set_color(beautiful.fg_normal)
-				  elseif cpu_usage > 15 then
-					  cpubar:set_color(beautiful.fg_normal)
-				  else
-					  cpubar:set_color(green)
-				  end
-				  cpubar:set_value(cpu_usage / 100)
-			  end
-		  })
+cpumargin = wibox.layout.margin(cpubar, dpi(2), dpi(7))
+cpumargin:set_top(dpi(6))
+cpumargin:set_bottom(dpi(6))
+cpuupd = lain.widgets.cpu(
+	{
+		settings = function()
+			cpu_usage = tonumber(cpu_now.usage)
+			if cpu_usage >= 98 then
+				cpubar:set_color(red)
+			elseif cpu_usage > 50 then
+				cpubar:set_color(beautiful.fg_normal)
+			elseif cpu_usage > 15 then
+				cpubar:set_color(beautiful.fg_normal)
+			else
+				cpubar:set_color(green)
+			end
+			cpubar:set_value(cpu_usage / 100)
+		end
+	}
+)
 cpuwidget = wibox.widget.background(cpumargin)
 cpuwidget:set_bgimage(beautiful.widget_bg)
 
 -- / fs
 fsicon = wibox.widget.imagebox(beautiful.widget_hdd)
-fswidget = lain.widgets.fs({
-			   settings  = function()
-				   widget:set_text(" " .. string.format("%3d", fs_now.used) .. "% ")
-			   end
-		   })
+fswidget = lain.widgets.fs(
+	{
+		settings  = function()
+			widget:set_text(" " .. string.format("%3d", fs_now.used) .. "% ")
+		end
+	}
+)
 
 -- Battery
 baticon = wibox.widget.imagebox(beautiful.bat)
 batbar = awful.widget.progressbar()
 batbar:set_color(beautiful.fg_normal)
-batbar:set_width(55)
+batbar:set_width(dpi(55))
 batbar:set_ticks(true)
-batbar:set_ticks_size(6)
+batbar:set_ticks_size(dpi(6))
 batbar:set_background_color(beautiful.bg_normal)
-batmargin = wibox.layout.margin(batbar, 2, 7)
-batmargin:set_top(6)
-batmargin:set_bottom(6)
-batupd = lain.widgets.bat({
-			  settings = function()
-				  if bat_now.perc == "N/A" or bat_now.status == "Not present" then
-					  bat_perc = 100
-					  baticon:set_image(beautiful.ac)
-				  elseif bat_now.status == "Charging" then
-					  bat_perc = tonumber(bat_now.perc)
-					  baticon:set_image(beautiful.ac)
+batmargin = wibox.layout.margin(batbar, dpi(2), dpi(7))
+batmargin:set_top(dpi(6))
+batmargin:set_bottom(dpi(6))
+batupd = lain.widgets.bat(
+	{
+		settings = function()
+			if bat_now.perc == "N/A" or bat_now.status == "Not present" then
+				bat_perc = 100
+				baticon:set_image(beautiful.ac)
+			elseif bat_now.status == "Charging" then
+				bat_perc = tonumber(bat_now.perc)
+				baticon:set_image(beautiful.ac)
 
-					  if bat_perc >= 98 then
-						  batbar:set_color(green)
-					  elseif bat_perc > 50 then
-						  batbar:set_color(beautiful.fg_normal)
-					  elseif bat_perc > 15 then
-						  batbar:set_color(beautiful.fg_normal)
-					  else
-						  batbar:set_color(red)
-					  end
-				  else
-					  bat_perc = tonumber(bat_now.perc)
+				if bat_perc >= 98 then
+					batbar:set_color(green)
+				elseif bat_perc > 50 then
+					batbar:set_color(beautiful.fg_normal)
+				elseif bat_perc > 15 then
+					batbar:set_color(beautiful.fg_normal)
+				else
+					batbar:set_color(red)
+				end
+			else
+				bat_perc = tonumber(bat_now.perc)
 
-					  if bat_perc >= 98 then
-						  batbar:set_color(green)
-					  elseif bat_perc > 50 then
-						  batbar:set_color(beautiful.fg_normal)
-						  baticon:set_image(beautiful.bat)
-					  elseif bat_perc > 15 then
-						  batbar:set_color(beautiful.fg_normal)
-						  baticon:set_image(beautiful.bat_low)
-					  else
-						  batbar:set_color(red)
-						  baticon:set_image(beautiful.bat_no)
-					  end
-				  end
-				  batbar:set_value(bat_perc / 100)
-			  end
-		  })
+				if bat_perc >= 98 then
+					batbar:set_color(green)
+				elseif bat_perc > 50 then
+					batbar:set_color(beautiful.fg_normal)
+					baticon:set_image(beautiful.bat)
+				elseif bat_perc > 15 then
+					batbar:set_color(beautiful.fg_normal)
+					baticon:set_image(beautiful.bat_low)
+				else
+					batbar:set_color(red)
+					baticon:set_image(beautiful.bat_no)
+				end
+			end
+			batbar:set_value(bat_perc / 100)
+		end
+	}
+)
 batwidget = wibox.widget.background(batmargin)
 batwidget:set_bgimage(beautiful.widget_bg)
 
 -- ALSA volume
 volicon = wibox.widget.imagebox(beautiful.widget_vol)
-volumewidget = lain.widgets.alsa({
-				 settings = function()
-					 if volume_now.status == "off" then
-						 volicon:set_image(beautiful.widget_vol_mute)
-					 elseif tonumber(volume_now.level) == 0 then
-						 volicon:set_image(beautiful.widget_vol_no)
-					 elseif tonumber(volume_now.level) <= 50 then
-						 volicon:set_image(beautiful.widget_vol_low)
-					 else
-						 volicon:set_image(beautiful.widget_vol)
-					 end
+volumewidget = lain.widgets.alsa(
+	{
+		settings = function()
+			if volume_now.status == "off" then
+				volicon:set_image(beautiful.widget_vol_mute)
+			elseif tonumber(volume_now.level) == 0 then
+				volicon:set_image(beautiful.widget_vol_no)
+			elseif tonumber(volume_now.level) <= 50 then
+				volicon:set_image(beautiful.widget_vol_low)
+			else
+				volicon:set_image(beautiful.widget_vol)
+			end
 
-					 widget:set_text(" " .. string.format("%3d", volume_now.level) .. "% ")
-				 end
-			 })
+			widget:set_text(" " .. string.format("%3d", volume_now.level) .. "% ")
+		end
+	}
+)
 
 -- Net
 neticon = wibox.widget.imagebox(beautiful.widget_net)
 neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
-netwidget = lain.widgets.net({
-			     settings = function()
-				     widget:set_markup(
-					     markup("#7AC82E", string.format("%4d", net_now.received))
-					     .. " " ..
-					     markup("#46A8C3", string.format("%4d", net_now.sent))
-					     .. " "
-				     )
-			     end
-		     })
+netwidget = lain.widgets.net(
+	{
+		settings = function()
+			widget:set_markup(
+				markup("#7AC82E", string.format("%4d", net_now.received))
+				.. " " ..
+				markup("#46A8C3", string.format("%4d", net_now.sent))
+				.. " "
+			)
+		end
+	}
+)
 
 -- Separators
 spr = wibox.widget.textbox(' ')
@@ -307,7 +333,7 @@ mytasklist.buttons = awful.util.table.join(
 		instance:hide()
 		instance = nil
 	else
-		instance = awful.menu.clients({ width=250 })
+		instance = awful.menu.clients({ width=dpi(250) })
 	end
 end),
 	awful.button({ }, 4, function ()
@@ -317,10 +343,11 @@ end),
 	awful.button({ }, 5, function ()
 awful.client.focus.byidx(-1)
 if client.focus then client.focus:raise() end
-end))
+end)
+)
 
 -- awfs
-awfs.callback = function(screen, ontop) 
+awfs.callback = function(screen, ontop)
 	mytopwibox[screen].ontop = ontop
 	mybotwibox[screen].ontop = ontop
 end
@@ -346,7 +373,6 @@ local function refreshScreen (screen, visible, wibox)
 end
 
 for s = 1, screen.count() do
-
 	-- Create a promptbox for each screen
 	mypromptbox[s] = awful.widget.prompt()
 
@@ -371,20 +397,20 @@ for s = 1, screen.count() do
 							  if awful.widget.tasklist.filter.minimizedcurrenttags(c, screen) then
 								  return false
 							  end
-							  return awful.widget.tasklist.filter.focused(c, screen)  
+							  return awful.widget.tasklist.filter.focused(c, screen)
 						  end
 						  return false
 					  end, mytasklist.buttons)
-	mytasklist[s] = awful.widget.tasklist(s, 
+	mytasklist[s] = awful.widget.tasklist(s,
 					  function (c, screen)
 						  return not awful.widget.tasklist.filter.focused(c, screen) and awful.widget.tasklist.filter.currenttags(c, screen)
 					  end, mytasklist.buttons)
 
 	-- Create the top wibox
-	mytopwibox[s] = awful.wibox({ position = "top", ontop = true, screen = s, height = 18 })
+	mytopwibox[s] = awful.wibox({ position = "top", ontop = true, screen = s, height = dpi(18) })
 
 	-- Create the bottom wibox
-	mybotwibox[s] = awful.wibox({ position = "bottom", ontop = true, screen = s, height = 18 })
+	mybotwibox[s] = awful.wibox({ position = "bottom", ontop = true, screen = s, height = dpi(18) })
 	mybotwibox[s].visible = false
 
 	bottom_right_layout = wibox.layout.align.horizontal()
@@ -443,7 +469,7 @@ root.buttons(awful.util.table.join(
 	awful.button({ }, 3, function () mymainmenu:toggle() end),
 	awful.button({ }, 4, awful.tag.viewnext),
 	awful.button({ }, 5, awful.tag.viewprev)
-									))
+))
 -- }}}
 
 -- {{{ Key bindings
@@ -454,7 +480,7 @@ globalkeys = awful.util.table.join(
 	awful.key({ altkey,            }, "Print", function() awful.util.spawn("xfce4-screenshooter -o gimp -w", false) end),
 	-- Take a screenshot of an area
 	awful.key({ "Shift",           }, "Print", function() awful.util.spawn("xfce4-screenshooter -o gimp -r", false) end),
-	-- Copy a screenshot to clipboard 
+	-- Copy a screenshot to clipboard
 	awful.key({ "Control",         }, "Print", function() awful.util.spawn("xfce4-screenshooter -c", false) end),
 	-- Copy a screenshot of a window to clipboard
 	awful.key({ "Control", altkey  }, "Print", function() awful.util.spawn("xfce4-screenshooter -c -w", false) end),
@@ -468,22 +494,22 @@ globalkeys = awful.util.table.join(
 
 	-- Non-empty tag browsing
 	--[[
-	awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
-	awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
-	]]
+awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
+awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
+]]
 	-- Default client focus
 	--[[
-	awful.key({ altkey }, "k",
-	   function ()
-		   awful.client.focus.byidx( 1)
-		   if client.focus then client.focus:raise() end
-	   end),
-	awful.key({ altkey }, "j",
-	   function ()
-		   awful.client.focus.byidx(-1)
-		   if client.focus then client.focus:raise() end
-	   end),
-	]]
+awful.key({ altkey }, "k",
+function ()
+awful.client.focus.byidx( 1)
+if client.focus then client.focus:raise() end
+end),
+awful.key({ altkey }, "j",
+function ()
+awful.client.focus.byidx(-1)
+if client.focus then client.focus:raise() end
+end),
+]]
 	-- By direction client focus
 	awful.key({ modkey }, "j",
 	   function()
@@ -503,9 +529,9 @@ globalkeys = awful.util.table.join(
 	awful.key({ modkey }, "l",
 	   function()
 		   --[[
-		   awful.client.focus.bydirection("right")
-		   if client.focus then client.focus:raise() end
-		   ]]
+awful.client.focus.bydirection("right")
+if client.focus then client.focus:raise() end
+]]
 		   os.execute("dm-tool lock")
 	   end),
 
@@ -536,25 +562,25 @@ globalkeys = awful.util.table.join(
 	awful.key({ altkey,           }, "Tab",
 	   function ()
 		   --[[
-		   awful.client.cycle(false)
-		   awful.client.focus.byidx(0, awful.client.getmaster())
-		   if client.focus then client.focus:raise() end
-		   ]]
+awful.client.cycle(false)
+awful.client.focus.byidx(0, awful.client.getmaster())
+if client.focus then client.focus:raise() end
+]]
 		   switcher.switch(1, "Alt_L", "Tab", "ISO_Left_Tab")
 	   end),
 	awful.key({ altkey, "Shift"   }, "Tab",
 	   function ()
 		   --[[
-		   awful.client.cycle(true)
-		   awful.client.focus.byidx(0, awful.client.getmaster())
-		   if client.focus then client.focus:raise() end
-		   ]]
+awful.client.cycle(true)
+awful.client.focus.byidx(0, awful.client.getmaster())
+if client.focus then client.focus:raise() end
+]]
 		   switcher.switch(-1, "Alt_L", "Tab", "ISO_Left_Tab")
 	   end),
 	--[[
-	awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
-	awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
-	]]
+awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
+awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
+]]
 	awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
 	awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
 	awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
@@ -573,8 +599,8 @@ globalkeys = awful.util.table.join(
 
 	-- Widgets popups
 	--[[
-	awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
-	awful.key({ altkey,           }, "h",      function () fswidget.show(7) end),
+awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
+awful.key({ altkey,           }, "h",      function () fswidget.show(7) end),
 	--]]
 	-- ALSA volume control
 	awful.key({ }, "#123",
@@ -597,34 +623,34 @@ globalkeys = awful.util.table.join(
 		   os.execute("amixer set Capture toggle")
 	   end),
 	--[[
-	awful.key({ altkey, "Control" }, "m",
-	   function ()
-		   os.execute(string.format("amixer set %s 100%%", volumewidget.channel))
-		   volumewidget.update()
-	   end),
+awful.key({ altkey, "Control" }, "m",
+function ()
+os.execute(string.format("amixer set %s 100%%", volumewidget.channel))
+volumewidget.update()
+end),
 
-	-- MPD control
-	awful.key({ altkey, "Control" }, "Up",
-	   function ()
-		   awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
-		   mpdwidget.update()
-	   end),
-	awful.key({ altkey, "Control" }, "Down",
-	   function ()
-		   awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
-		   mpdwidget.update()
-	   end),
-	awful.key({ altkey, "Control" }, "Left",
-	   function ()
-		   awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
-		   mpdwidget.update()
-	   end),
-	awful.key({ altkey, "Control" }, "Right",
-	   function ()
-		   awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
-		   mpdwidget.update()
-	   end),
-	]]
+-- MPD control
+awful.key({ altkey, "Control" }, "Up",
+function ()
+awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
+mpdwidget.update()
+end),
+awful.key({ altkey, "Control" }, "Down",
+function ()
+awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
+mpdwidget.update()
+end),
+awful.key({ altkey, "Control" }, "Left",
+function ()
+awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
+mpdwidget.update()
+end),
+awful.key({ altkey, "Control" }, "Right",
+function ()
+awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
+mpdwidget.update()
+end),
+]]
 	-- Copy to clipboard
 	awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
 
@@ -650,7 +676,7 @@ clientkeys = awful.util.table.join(
 	awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
 	awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
 	awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-	awful.key({ modkey,           }, "o",      
+	awful.key({ modkey,           }, "o",
 	   function (c)
 		   local screen = c.screen
 		   awful.client.movetoscreen(c)
@@ -726,17 +752,19 @@ root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
-awful.rules.rules = {
+awful.rules.rules = {{
 	-- All clients will match this rule.
-	{ rule = { }, properties = {
-	border_width = beautiful.border_width,
-	border_color = beautiful.border_normal,
-	focus = awful.client.focus.filter,
-	keys = clientkeys,
-	buttons = clientbuttons,
-	size_hints_honor = false,
-} },
-}
+	rule = {
+	},
+	properties = {
+		border_width = beautiful.border_width,
+		border_color = beautiful.border_normal,
+		focus = awful.client.focus.filter,
+		keys = clientkeys,
+		buttons = clientbuttons,
+		size_hints_honor = false
+	}
+}}
 -- }}}
 
 -- {{{ Signals
@@ -785,7 +813,7 @@ client.connect_signal("focus", function(c)
 	end
 end)
 client.connect_signal("unfocus", function(c)
-	c.border_color = beautiful.border_normal
+c.border_color = beautiful.border_normal
 end)
 -- }}}
 
@@ -797,21 +825,21 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
 	if #clients > 0 then -- Fine grained borders and floaters control
 		for _, c in pairs(clients) do -- Floaters always have borders
 			if awful.client.floating.get(c) or layout == "floating" then
-				c.border_width = beautiful.border_width
+				c.border_width = dpi(beautiful.border_width)
 
 				-- No borders with only one visible client
 			elseif #clients == 1 or layout == "max" then
 				c.border_width = 0
 			else
-				c.border_width = beautiful.border_width
+				c.border_width = dpi(beautiful.border_width)
 			end
 		end
 	end
 end)
-end
 -- }}}
+end
 
 -- Autostart
-run_once("cmst -m")
+run_once("nm-applet")
 run_once("xfce4-power-manager")
 run_once("compton")
