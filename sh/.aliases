@@ -30,7 +30,7 @@ _git_wrapper() {
 					"$GIT_PATH" config user.email "$GIT_EMAIL"
 				fi
 			fi
-		done <<< $("$GIT_PATH" config -l | egrep "^user\.(\w+)\.(name|email)=.*$" | sed -E "s/^user\.(\w+)\..*$/\1/")
+		done <<< $("$GIT_PATH" config -l | egrep "^user\.\w+(\.\w+)?\.(name|email)=.*$" | sed -E "s/^user\.(\w+(\.\w+)?)\..*$/\1/")
 	fi
 	"$GIT_PATH" "$@"
 }
