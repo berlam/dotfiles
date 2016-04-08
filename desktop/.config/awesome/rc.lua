@@ -15,6 +15,9 @@ require("awesome-remember-geometry")
 
 -- {{{ Set DPI for awesome 3.5
 local xdpi = tonumber(awful.util.pread("xrdb -query | grep dpi | egrep -o '[[:digit:]]+' | head -1"))
+if not xdpi then
+	xdpi = 96
+end
 require("lgi").PangoCairo.FontMap.get_default():set_resolution(xdpi)
 function dpi(size)
 	return math.ceil(size / 96 * xdpi)
