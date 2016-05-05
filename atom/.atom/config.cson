@@ -1,7 +1,8 @@
 "*":
   "atom-beautify":
-    _analyticsUserId: "e8e59587-27e3-4a29-af9c-9983ea33086d"
-    analytics: false
+    general:
+      _analyticsUserId: "a5380ad7-f077-46df-bff0-fd18c6db2c66"
+      analytics: false
   "base16-syntax":
     scheme: "3024"
   core:
@@ -9,6 +10,7 @@
     autoHideMenuBar: true
     disabledPackages: [
       "metrics"
+      "jade-autocompile"
     ]
     themes: [
       "atom-dark-ui"
@@ -21,21 +23,33 @@
     invisibles: {}
     lineHeight: 1.3
     preferredLineLength: 140
+    zoomFontWhenCtrlScrolling: false
   emmet: {}
   "exception-reporting":
-    userId: "49da69a0-3711-6c5d-0d1c-67d8b26b088b"
+    userId: "cc843cdf-5a16-ca33-ecb2-981c4526442d"
   "go-plus":
     suppressBuiltinAutocompleteProvider: false
   "highlight-selected": {}
+  "keyboard-scroll":
+    animate: false
+    linesToScrollKeydown: 1
+    linesToScrollSingle: 1
   linter: {}
   "linter-golinter": {}
   "markdown-preview": {}
   "one-dark-ui": {}
   "open-file-in": {}
   pigments: {}
+  "svg-preview": {}
   "todo-show": {}
   welcome:
     showOnStartup: false
+".jade.source":
+  editor:
+    preferredLineLength: 140
 ".lua.source":
+  editor:
+    preferredLineLength: 140
+".pyjade.source":
   editor:
     preferredLineLength: 140

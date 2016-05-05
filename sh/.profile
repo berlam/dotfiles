@@ -49,17 +49,18 @@ export BROWSER=google-chrome
 export LESSHISTFILE=/dev/null
 
 ### Dev
-export IDEA_JDK=/opt/jdk/tux/1.8.0_66
+export IDEA_JDK=/opt/jdk/tux/current
+export ANDROID_HOME=$HOME/android-sdk-linux
 # Go
-export GOROOT=/opt/golang/1.5.3
+export GOROOT=/opt/golang/current
 export GOPATH=$HOME/.golang:$HOME/Projects
 export GOBIN=$HOME/.golang/bin
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
-export JAVA_HOME=/opt/jdk/x64/1.7.0_79
-export M2_HOME=/opt/apache/maven/3.0.5
+export JAVA_HOME=/opt/jdk/x64/current
+export M2_HOME=/opt/apache/maven/current
 # JavaScript
-export NODE_HOME=/opt/node/5.5.0
+export NODE_HOME=/opt/node/current
 
 ### PATH
 export PATH=$PATH:$GOROOT/bin:$JAVA_HOME/bin:$M2_HOME/bin:$NODE_HOME/bin:$GOBIN

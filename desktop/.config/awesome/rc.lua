@@ -149,7 +149,7 @@ mytextclock = lain.widgets.abase(
 )
 
 -- calendar
-lain.widgets.calendar:attach(mytextclock, { font = beautiful.font_name, font_size = 10 })
+lain.widgets.calendar:attach(mytextclock, { font = beautiful.font_name, font_size = dpi(10) })
 
 -- MEM
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
