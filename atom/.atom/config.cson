@@ -44,6 +44,7 @@
   pigments: {}
   "svg-preview": {}
   "todo-show": {}
+  "tree-view": {}
   welcome:
     showOnStartup: false
 ".jade.source":

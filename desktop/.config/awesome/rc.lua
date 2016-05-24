@@ -72,7 +72,7 @@ function hex2rgba(hex)
 end
 switcher.settings.preview_box_bg = beautiful.border_focus .. "AA"
 switcher.settings.preview_box_border = beautiful.bg_focus .. "00"
-switcher.settings.preview_box_delay = 0
+switcher.settings.preview_box_delay = 150
 switcher.settings.preview_box_title_font = {beautiful.font_name}
 switcher.settings.preview_box_title_font_size_factor = 1
 switcher.settings.preview_box_title_color = {hex2rgba(beautiful.fg_focus)}
