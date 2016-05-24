@@ -19,8 +19,10 @@ alias rd=rmdir
 _git_wrapper() {
 	GIT_PATH=$(which -a git | sed -n 2p)
 	if [ $("$GIT_PATH" rev-parse --is-inside-work-tree) ]; then
+		"$GIT_PATH" config user.name `"$GIT_PATH" config --global user.name`
+		"$GIT_PATH" config user.email `"$GIT_PATH" config --global user.email`
 		while read SERVICE; do
-			if [ -n $("$GIT_PATH" remote -v 2>/dev/null | grep "^origin\b.*$SERVICE.*(push)$" >/dev/null 2>&1) ]; then
+			if "$GIT_PATH" remote -v | grep -xq "^origin\b.*$SERVICE.*(push)$"; then
 				GIT_USERNAME=$("$GIT_PATH" config "user.$SERVICE.name")
 				if [ -n "$GIT_USERNAME" ]; then
 					"$GIT_PATH" config user.name "$GIT_USERNAME"
@@ -29,6 +31,7 @@ _git_wrapper() {
 				if [ -n "$GIT_EMAIL" ]; then
 					"$GIT_PATH" config user.email "$GIT_EMAIL"
 				fi
+				break
 			fi
 		done <<< $("$GIT_PATH" config -l | egrep "^user\.\w+(\.\w+)?\.(name|email)=.*$" | sed -E "s/^user\.(\w+(\.\w+)?)\..*$/\1/")
 	fi

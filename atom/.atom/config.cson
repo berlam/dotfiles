@@ -3,6 +3,8 @@
     general:
       _analyticsUserId: "a5380ad7-f077-46df-bff0-fd18c6db2c66"
       analytics: false
+  autosave:
+    enabled: true
   "base16-syntax":
     scheme: "3024"
   core:
