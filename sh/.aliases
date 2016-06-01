@@ -31,10 +31,10 @@ _git_wrapper() {
 		GIT_USERNAME="${GIT_USERNAME:-`\"$GIT_PATH\" config --global user.name`}"
 		GIT_EMAIL="${GIT_EMAIL:-`\"$GIT_PATH\" config --global user.email`}"
 		if [ -n "$GIT_USERNAME" ] && [ "$GIT_USERNAME" != "`\"$GIT_PATH\" config user.name`" ]; then
-			"$GIT_PATH" config user.name "$GIT_USERNAME"
+			"$GIT_PATH" config --replace-all user.name "$GIT_USERNAME"
 		fi
 		if [ -n "$GIT_EMAIL" ] && [ "$GIT_EMAIL" != "`\"$GIT_PATH\" config user.email`" ]; then
-			"$GIT_PATH" config user.email "$GIT_EMAIL"
+			"$GIT_PATH" config --replace-all user.email "$GIT_EMAIL"
 		fi
 	fi
 	"$GIT_PATH" "$@"
