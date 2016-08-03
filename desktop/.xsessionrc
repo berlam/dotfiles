@@ -6,7 +6,7 @@
 #xinput set-prop 10 137 0
 synclient touchpadoff=1
 #Faster mouse for HiDPI
-SCREEN_HEIGHT=`xdpyinfo | egrep -o "dimensions:[[:space:]]+[[:digit:]]+x" | egrep -o "[[:digit:]]+"`
+SCREEN_HEIGHT=`xrandr -q | egrep -o "primary[[:space:]]+[[:digit:]]+x" | egrep -o "[[:digit:]]+"`
 if [ "$SCREEN_HEIGHT" -gt 1920 ]; then
 	TRACKPOINT_DEVICE=`xinput --list | grep -i trackpoint | egrep -o "id=[[:digit:]]+" | egrep -o "[[:digit:]]+"`
 	TRACKPOINT_PROP=`xinput list-props "$TRACKPOINT_DEVICE" | grep -i "Device Accel Constant Deceleration" | egrep -o "\([[:digit:]]+\)" | egrep -o "[[:digit:]]+"`

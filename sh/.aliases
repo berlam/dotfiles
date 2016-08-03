@@ -5,6 +5,7 @@
 alias o=mimeopen
 
 alias history='fc -l 1'
+alias c='xclip -selection clipboard'
 alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
