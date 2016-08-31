@@ -49,7 +49,6 @@ export BROWSER=google-chrome
 export LESSHISTFILE=/dev/null
 
 ### Dev
-export IDEA_JDK=/opt/jdk/tux/current
 export ANDROID_HOME=$HOME/android-sdk-linux
 # Go
 export GOROOT=/opt/golang/current
