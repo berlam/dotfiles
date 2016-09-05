@@ -20,6 +20,7 @@ Plugin 'Blackrush/vim-gocode'
 "All of the Plugins must be added before the following line
 call vundle#end()    
 
+let g:GPGExecutable = "gpg2"
 filetype plugin indent on
 syntax on
 let base16colorspace=256
