@@ -48,7 +48,7 @@ if [ -n "$GIT_NAME" ] && [ "$GIT_NAME" != "`\"$GIT_PATH\" config user.name`" ]; 
 	"$GIT_PATH" config --replace-all user.name "$GIT_NAME"
 fi
 if [ -n "$GIT_EMAIL" ] && [ "$GIT_EMAIL" != "`\"$GIT_PATH\" config user.email`" ]; then
-	"$GIT_PATH" config --replace-all user.name "$GIT_EMAIL"
+	"$GIT_PATH" config --replace-all user.email "$GIT_EMAIL"
 fi
 
 echo "Commit as \"$GIT_NAME ($GIT_EMAIL)\""
