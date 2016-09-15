@@ -1,12 +1,16 @@
 [submodule "desktop/.config/awesome/awesome-switcher-preview"]
 	path = desktop/.config/awesome/awesome-switcher-preview
 	url = https://github.com/berlam/awesome-switcher-preview.git
+	branch = master
 [submodule "desktop/.config/awesome/awesome-fullscreen"]
 	path = desktop/.config/awesome/awesome-fullscreen
 	url = https://github.com/berlam/awesome-fullscreen.git
+	branch = master
 [submodule "desktop/.config/awesome/awesome-remember-geometry"]
 	path = desktop/.config/awesome/awesome-remember-geometry
 	url = https://github.com/berlam/awesome-remember-geometry.git
+	branch = master
 [submodule "desktop/.config/awesome/awesome-lenovo"]
 	path = desktop/.config/awesome/awesome-lenovo
 	url = https://github.com/berlam/awesome-lenovo.git
+	branch = master
