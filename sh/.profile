@@ -58,8 +58,15 @@ export GOBIN=$HOME/.golang/bin
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
 export JAVA_HOME=/opt/jdk/x64/current
 export M2_HOME=/opt/apache/maven/current
-# JavaScript
-export NODE_HOME=/opt/node/current
 
 ### PATH
-export PATH=$PATH:$GOROOT/bin:$JAVA_HOME/bin:$M2_HOME/bin:$NODE_HOME/bin:$GOBIN
+# No whitespaces before ":"!
+export PATH=$PATH\
+:$JAVA_HOME/bin\
+:$M2_HOME/bin\
+:$ANDROID_HOME/tools\
+:$ANDROID_HOME/platform-tools\
+:$GOROOT/bin\
+:$GOBIN\
+:/opt/node/current/bin\
+:/opt/gae/go/current\
