@@ -41,6 +41,8 @@ export LC_TELEPHONE="de_DE.UTF-8"
 export LC_MEASUREMENT="de_DE.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
 export GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+### HiDPI
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 ### Programs
 export EDITOR=vim
