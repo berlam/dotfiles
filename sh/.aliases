@@ -2,7 +2,7 @@
 [ -z "$PS1" ] && return
 
 # set aliases
-alias o=mimeopen
+alias o='xdg-open >/dev/null 2>&1'
 
 alias history='fc -l 1'
 alias c='xclip -selection clipboard'
@@ -14,6 +14,7 @@ alias lsa='ls -lah'
 alias po=popd
 alias pu=pushd
 alias rd=rmdir
+alias bat='cat /sys/class/power_supply/BAT{0,1}/{status,capacity}'
 
 # stow wrapper
 _stow() {
