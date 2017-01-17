@@ -14,7 +14,7 @@ alias lsa='ls -lah'
 alias po=popd
 alias pu=pushd
 alias rd=rmdir
-alias bat='cat /sys/class/power_supply/BAT{0,1}/{status,capacity}'
+alias bat='cat /sys/class/power_supply/BAT*/{status,capacity}'
 
 # stow wrapper
 _stow() {
