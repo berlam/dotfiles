@@ -151,16 +151,18 @@ local myawesomemenu = {
 	{ "restart", awesome.restart },
 	{ "quit", function() awesome.quit() end }
 }
-local mymainmenu = freedesktop.menu.build({
-					  before = {
-						  { "Awesome", myawesomemenu, beautiful.awesome_icon },
-						  -- other triads can be put here
-					  },
-					  after = {
-						  { "Open terminal", terminal },
-						  -- other triads can be put here
-					  }
-				  })
+local mymainmenu = freedesktop.menu.build(
+	{
+		before = {
+			{ "Awesome", myawesomemenu, beautiful.awesome_icon },
+			-- other triads can be put here
+		},
+		after = {
+			{ "Open terminal", terminal },
+			-- other triads can be put here
+		}
+	}
+)
 
 -- {{{ Wibox
 local markup = lain.util.markup
@@ -180,16 +182,18 @@ local clock = lain.widgets.abase(
 )
 
 -- calendar
-lain.widgets.calendar({
-		      cal = "/usr/bin/ncal -h -w -3",
-		      followtag = true,
-		      attach_to = { clock.widget },
-		      notification_preset = {
-			      font = beautiful.font_name,
-			      fg   = beautiful.fg_normal,
-			      bg   = beautiful.bg_normal
-		      }
-	      })
+lain.widgets.calendar(
+	{
+		cal = "/usr/bin/ncal -h -w -3",
+		followtag = true,
+		attach_to = { clock.widget },
+		notification_preset = {
+			font = beautiful.font_name,
+			fg   = beautiful.fg_normal,
+			bg   = beautiful.bg_normal
+		}
+	}
+)
 
 -- MEM
 local memicon = wibox.widget.imagebox(beautiful.widget_mem)
@@ -203,45 +207,57 @@ local mem = lain.widgets.mem(
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
-local cpu = lain.widgets.cpu({
-			     settings = function()
-				     widget:set_text(" " .. cpu_now.usage .. "% ")
-			     end
-		     })
+local cpu = lain.widgets.cpu(
+	{
+		settings = function()
+			widget:set_text(" " .. string.format("%3d", cpu_now.usage) .. "% ")
+		end
+	}
+)
 
 -- / fs
 local fsicon = wibox.widget.imagebox(beautiful.widget_hdd)
-local fsroot = lain.widgets.fs({
-			       options  = "--exclude-type=tmpfs",
-			       notification_preset = { fg = beautiful.fg_normal, bg = beautiful.bg_normal, font = beautiful.font_name },
-			       settings  = function()
-				       widget:set_text(" " .. fs_now.used .. "% ")
-			       end
-		       }
-	       )
+local fsroot = lain.widgets.fs(
+	{
+		followtag = true,
+		options  = "--exclude-type=tmpfs",
+		notification_preset = { 
+			font = beautiful.font_name,
+			fg   = beautiful.fg_normal,
+			bg   = beautiful.bg_normal
+		},
+		settings = function()
+			widget:set_text(" " .. string.format("%3d", fs_now.used) .. "% ")
+		end
+	}
+)
 
 -- Battery
 local baticon = wibox.widget.imagebox(beautiful.bat)
-local bat = lain.widgets.bat({
-			     settings = function()
-				     if bat_now.status ~= "N/A" then
-					     if bat_now.ac_status == 1 then
-						     widget:set_markup(" AC ")
-						     baticon:set_image(beautiful.widget_ac)
-						     return
-					     elseif not bat_now.perc and tonumber(bat_now.perc) <= 5 then
-						     baticon:set_image(beautiful.widget_battery_empty)
-					     elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
-						     baticon:set_image(beautiful.widget_battery_low)
-					     else
-						     baticon:set_image(beautiful.widget_battery)
-					     end
-					     widget:set_markup(" " .. bat_now.perc .. "% ")
-				     else
-					     baticon:set_image(beautiful.widget_ac)
-				     end
-			     end
-		     })
+local bat = lain.widgets.bat(
+	{
+		batteries = { "BAT0", "BAT1", "BAT2" },
+		settings = function()
+			local perc = ""
+			for i, status in pairs(bat_now.n_status) do
+				if bat_now.ac_status == 1 then
+					widget:set_markup(" AC ")
+					baticon:set_image(beautiful.widget_ac)
+					return
+				end
+				if status ~= "N/A" then
+					perc = perc .. string.format("%3d", bat_now.n_perc[i]) .. "% "
+				end
+			end
+			if perc == "" then
+				baticon:set_image(beautiful.widget_ac)
+			else
+				baticon:set_image(beautiful.widget_battery)
+				widget:set_markup(perc)
+			end
+		end
+	}
+)
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(beautiful.widget_vol)
@@ -266,17 +282,18 @@ local volume = lain.widgets.alsa(
 -- Net
 local neticon = wibox.widget.imagebox(beautiful.widget_net)
 neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
-local net = lain.widgets.net({
-			     settings = function()
-				     widget:set_markup(
-					     markup("#7AC82E", string.format("%4d", net_now.received))
-					     .. " " ..
-					     markup("#46A8C3", string.format("%4d", net_now.sent))
-					     .. " "
-				     )
-			     end
-		     }
-	     )
+local net = lain.widgets.net(
+	{
+		settings = function()
+			widget:set_markup(
+				markup("#7AC82E", string.format("%4d", net_now.received))
+				.. " " ..
+				markup("#46A8C3", string.format("%4d", net_now.sent))
+				.. " "
+			)
+		end
+	}
+)
 
 -- Separators
 local spr = wibox.widget.textbox(' ')
