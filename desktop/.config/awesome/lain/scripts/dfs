@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 #
 #   Adapted from Eridan's "fs" (cleanup, enhancements and switch to bash/Linux)
 #   JM,  10/12/2004
@@ -11,10 +11,11 @@
 # -------------------------------------------------------------------------
 #   Decoding options
 # -------------------------------------------------------------------------
-USAGE="Usage: $0 [-h(elp)] | [-n(arrow mode)] | [-w(eb output)]"
+USAGE="Usage: $0 [-h(elp)] | [-n(arrow mode)] | [-w(eb output) | --type=<fstype> | --exclude-type=<fstype>]"
 
 NARROW_MODE=0
 WEB_OUTPUT=0
+DF_OPTIONS=""
 
 while [ $# -gt 0 ]; do
 case "$1" in
@@ -30,6 +31,12 @@ NARROW_MODE=1
 ;;
 "-w" )
 WEB_OUTPUT=1
+;;
+--type=*)
+DF_OPTIONS+=" $1"
+;;
+--exclude-type=*)
+DF_OPTIONS+=" $1"
 ;;
 * )
 echo $USAGE
@@ -57,6 +64,9 @@ SORT_COMMAND="/usr/bin/sort -k6"
 AWK_COMMAND="/usr/bin/env gawk"
 ;;
 esac
+
+# Add additional df options
+DF_COMMAND+=$DF_OPTIONS
 
 # -------------------------------------------------------------------------
 #   Grabbing "df" result
@@ -212,7 +222,7 @@ echo "$SORTED_FILE_SYSTEMS_INFO" | $AWK_COMMAND -v DEBUG=$DEBUG -v PATTERN=$PATT
 							 printf ("\n%s", narrow_margin);
 						 else
 							 printf ("%-*s", LEFT_COLUMN + 2, "");
-					 print "                                                     Used    Free     Total ";
+					 print "                                                    Used     Free       Total ";
 					 if (! NARROW_MODE)
 						 print "";
 				 }
@@ -352,7 +362,7 @@ $0 ~ PATTERN    {
 #           printf ("stars_number = %d\n", stars_number);
 
 			printf ("|");
-			for (i = 1; i <= stars_number; i++)
+			for (i = 1; i <= stars_number && i <= 49; i++)
 			{
 				printf ("%s", "*");
 			}
