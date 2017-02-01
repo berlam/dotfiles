@@ -123,11 +123,9 @@ local function client_menu_toggle_fn()
 	end
 end
 
-local function refreshScreen (screen, wibox, visible)
-	local clients = awful.tag.selected(screen):clients()
-	if #clients > 1 == visible then
-		wibox.visible = visible
-	end
+local function tag_bottom_bar_toggle_fn(screen)
+	local clients = screen.selected_tag:clients()
+	screen.mybotwibox.visible = #clients > 1
 	for _, c in pairs(clients) do
 		-- refresh width
 		if c.maximized_horizontal then
@@ -238,23 +236,32 @@ local bat = lain.widgets.bat(
 	{
 		batteries = { "BAT0", "BAT1", "BAT2" },
 		settings = function()
-			local perc = ""
-			for i, status in pairs(bat_now.n_status) do
-				if bat_now.ac_status == 1 then
-					widget:set_markup(" AC ")
-					baticon:set_image(beautiful.widget_ac)
+			if bat_now.ac_status ~= 1 then
+				local bat_count = 0
+				local bat_sum = 0
+				for i, status in pairs(bat_now.n_status) do
+					if status ~= "N/A" then
+						bat_count = bat_count + 1
+						bat_sum = bat_sum + bat_now.n_perc[i]
+					end
+				end
+				if bat_count > 0 then
+					-- At least one battery, combine all to a single value
+					local bat_perc = bat_sum / bat_count
+					if bat_perc <= 5 then
+						baticon:set_image(beautiful.widget_battery_empty)
+					elseif bat_perc <= 15 then
+						baticon:set_image(beautiful.widget_battery_low)	
+					else
+						baticon:set_image(beautiful.widget_battery)
+					end
+					widget:set_markup(string.format("%3d", bat_perc) .. "% ")
 					return
 				end
-				if status ~= "N/A" then
-					perc = perc .. string.format("%3d", bat_now.n_perc[i]) .. "% "
-				end
 			end
-			if perc == "" then
-				baticon:set_image(beautiful.widget_ac)
-			else
-				baticon:set_image(beautiful.widget_battery)
-				widget:set_markup(perc)
-			end
+			-- We must be on AC
+			baticon:set_image(beautiful.widget_ac)
+			widget:set_markup(" AC ")
 		end
 	}
 )
@@ -562,16 +569,14 @@ if client.focus then client.focus:raise() end
 	   function ()
 		   local s = mouse.screen
 		   awful.tag.viewnext(s)
-		   refreshScreen(s, s.mybotwibox, false)
-		   refreshScreen(s, s.mybotwibox, true)
+		   tag_bottom_bar_toggle_fn(s)
 	   end,
 	   {description = "next tag", group = "tag"}),
 	awful.key({ modkey, "Shift"   }, "Tab",
 	   function ()
 		   local s = mouse.screen
 		   awful.tag.viewprev(s)
-		   refreshScreen(s, s.mybotwibox, false)
-		   refreshScreen(s, s.mybotwibox, true)
+		   tag_bottom_bar_toggle_fn(s)
 	   end,
 	   {description = "previous tag", group = "tag"}),
 	awful.key({ altkey,           }, "Tab",
@@ -665,17 +670,10 @@ clientkeys = awful.util.table.join(
 	   {description = "toggle floating", group = "client"}),
 	awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
 	   {description = "move to master", group = "client"}),
-	awful.key({ modkey,           }, "o",
-	   function (c)
-		   local screen1 = c.screen
-		   c:move_to_screen()
-		   local screen2 = c.screen
-		   refreshScreen(screen1, screen1.mybotwibox, false)
-		   refreshScreen(screen2, screen2.mybotwibox, true)
-	   end,
+	awful.key({ modkey,           }, "o", function (c) c:move_to_screen() end,
 	   {description = "move to screen", group = "client"}),
 	awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-	   {description = "toggle keep on top", group = "client"}),
+		{description = "toggle keep on top", group = "client"}),
 	awful.key({ modkey,           }, "n",
 	   function (c)
 		   -- The client currently has the input focus, so it cannot be
@@ -785,32 +783,38 @@ client.connect_signal("manage", function (c)
 	end
 
 	-- show bottom bar when more than one client is on screen.
-	refreshScreen(c.screen, c.screen.mybotwibox, true)
-end)
-
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-		and awful.client.focus.filter(c) then
-		client.focus = c
-	end
+	tag_bottom_bar_toggle_fn(c.screen)
 end)
 
 -- signal function to execute when a new client disappears.
 client.connect_signal("unmanage", function(c)
 	-- hide bottom bar when only one client is on screen.
-	refreshScreen(c.screen, c.screen.mybotwibox, false)
+	tag_bottom_bar_toggle_fn(c.screen)
+end)
+
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
+		client.focus = c
+	end
+end)
+
+-- Toggle bottom bar on screen change
+client.connect_signal("request::tag", function(c)
+	-- Loop screens, as we have not the old screen available
+	for s in screen do
+		tag_bottom_bar_toggle_fn(s)
+	end
 end)
 
 -- No border for maximized clients
-client.connect_signal("focus",
-		      function(c)
-			      if c.maximized then -- no borders if only 1 client visible
-				      c.border_width = 0
-			      elseif #awful.screen.focused().clients > 1 then
-				      c.border_width = beautiful.border_width
-				      c.border_color = beautiful.border_focus
-			      end
-		      end)
+client.connect_signal("focus", function(c)
+	if c.maximized then -- no borders if only 1 client visible
+		c.border_width = 0
+	elseif #awful.screen.focused().clients > 1 then
+		c.border_width = beautiful.border_width
+		c.border_color = beautiful.border_focus
+	end
+end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
