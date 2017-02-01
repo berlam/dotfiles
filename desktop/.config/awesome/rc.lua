@@ -168,14 +168,10 @@ local separators = lain.util.separators
 
 -- Textclock
 local clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-
 local clock = lain.widgets.abase(
 	{
 		timeout  = 60,
-		cmd      = "date +'%a %d %b %R'",
-		settings = function()
-			widget:set_markup(" " .. output)
-		end
+		cmd      = "date +' %a %d %b %R '"
 	}
 )
 
@@ -236,7 +232,7 @@ local bat = lain.widgets.bat(
 	{
 		batteries = { "BAT0", "BAT1", "BAT2" },
 		settings = function()
-			if bat_now.ac_status ~= 1 then
+			if bat_now.ac_status ~= 1 and bat_now.status ~= "Charging" then
 				local bat_count = 0
 				local bat_sum = 0
 				for i, status in pairs(bat_now.n_status) do
@@ -249,19 +245,19 @@ local bat = lain.widgets.bat(
 					-- At least one battery, combine all to a single value
 					local bat_perc = bat_sum / bat_count
 					if bat_perc <= 5 then
-						baticon:set_image(beautiful.widget_battery_empty)
+						baticon:set_image(beautiful.bat_no)
 					elseif bat_perc <= 15 then
-						baticon:set_image(beautiful.widget_battery_low)	
+						baticon:set_image(beautiful.bat_low)	
 					else
-						baticon:set_image(beautiful.widget_battery)
+						baticon:set_image(beautiful.bat)
 					end
 					widget:set_markup(string.format("%3d", bat_perc) .. "% ")
 					return
 				end
 			end
 			-- We must be on AC
-			baticon:set_image(beautiful.widget_ac)
-			widget:set_markup(" AC ")
+			baticon:set_image(beautiful.ac)
+			widget:set_markup(bat_now.time .. " ")
 		end
 	}
 )
@@ -317,10 +313,10 @@ local taglist_buttons = awful.util.table.join(
 	end),
 	awful.button({ }, 3, awful.tag.viewtoggle),
 	awful.button({ modkey }, 3, function(t)
-	if client.focus then
-		client.focus:toggle_tag(t)
-	end
-end),
+		if client.focus then
+			client.focus:toggle_tag(t)
+		end
+	end),
 	awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
 	awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
@@ -343,12 +339,9 @@ local tasklist_buttons = awful.util.table.join(
 		end
 	end),
 	awful.button({ }, 3, client_menu_toggle_fn()),
-	awful.button({ }, 4, function ()
-	awful.client.focus.byidx(1)
-end),
-	awful.button({ }, 5, function ()
-awful.client.focus.byidx(-1)
-					  end))
+	awful.button({ }, 4, function () awful.client.focus.byidx(1) end),
+	awful.button({ }, 5, function () awful.client.focus.byidx(-1) end)
+)
 
 -- awfs
 awfs.callback = function(screen, ontop)
@@ -372,9 +365,6 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-	-- Quake application
-	s.quake = lain.util.quake({ app = terminal })
-
 	-- Wallpaper
 	set_wallpaper(s)
 
@@ -453,6 +443,7 @@ awful.screen.connect_for_each_screen(function(s)
 			neticon,
 			net.widget,
 			arrl_ld,
+			wibox.container.background(clockicon, beautiful.bg_focus),
 			wibox.container.background(clock.widget, beautiful.bg_focus),
 		},
 	}
