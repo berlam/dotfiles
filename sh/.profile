@@ -54,7 +54,7 @@ export LESSHISTFILE=/dev/null
 export ANDROID_HOME=$HOME/android-sdk-linux
 # Go
 export GOROOT=/opt/golang/current
-export GOPATH=$HOME/.golang:$HOME/Projects
+export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
 export GOBIN=$HOME/.golang/bin
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
@@ -71,4 +71,4 @@ export PATH=$PATH\
 :$GOROOT/bin\
 :$GOBIN\
 :/opt/node/current/bin\
-:/opt/gae/go/current\
+:/opt/google/appengine/go/current\
