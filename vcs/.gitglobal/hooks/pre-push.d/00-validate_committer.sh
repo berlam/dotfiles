@@ -25,14 +25,14 @@ GIT_NAME=
 GIT_EMAIL=
 
 while read REMOTE; do
-	PATTERN="`\"$GIT_PATH\" config \"user.$REMOTE.pattern\"`"
+	PATTERN="`\"$GIT_PATH\" config --get \"user.$REMOTE.pattern\"`"
 	if [ -z "$PATTERN" ]; then
 		echo "Empty pattern for \"$REMOTE\""
 		exit 1;
 	fi
 	if echo "$url" | egrep -q "$PATTERN"; then
-		GIT_NAME="`\"$GIT_PATH\" config \"user.$REMOTE.name\"`"
-		GIT_EMAIL="`\"$GIT_PATH\" config \"user.$REMOTE.email\"`"
+		GIT_NAME="`\"$GIT_PATH\" config --get \"user.$REMOTE.name\"`"
+		GIT_EMAIL="`\"$GIT_PATH\" config --get \"user.$REMOTE.email\"`"
 		break
 	fi
 done < <("$GIT_PATH" config --name-only --get-regexp "^user\..+\.pattern$" | sed -r "s/^user\.(.+)\.pattern$/\1/")
@@ -41,10 +41,10 @@ done < <("$GIT_PATH" config --name-only --get-regexp "^user\..+\.pattern$" | sed
 # Fallback to global settings, if empty.
 #
 if [ -z "$GIT_NAME" ]; then
-	GIT_NAME="`\"$GIT_PATH\" config --global user.name`"
+	GIT_NAME="`\"$GIT_PATH\" config --get --global user.name`"
 fi
 if [ -z "$GIT_EMAIL" ]; then
-	GIT_EMAIL="`\"$GIT_PATH\" config --global user.email`"
+	GIT_EMAIL="`\"$GIT_PATH\" config --get --global user.email`"
 fi
 
 z40=0000000000000000000000000000000000000000
@@ -66,7 +66,7 @@ do
 				echo >&2 "Found commit with wrong author in $local_ref, not pushing"
 				exit 1
 			fi
-		done < <("$GIT_PATH rev-list --author \"^$GIT_NAME\" \"$range\"")
+		done < <("$GIT_PATH" rev-list --author "^$GIT_NAME" "$range")
 	fi
 done
 
