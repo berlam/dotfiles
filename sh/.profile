@@ -52,14 +52,16 @@ export LESSHISTFILE=/dev/null
 
 ### Dev
 export ANDROID_HOME=$HOME/android-sdk-linux
-# Go
-export GOROOT=/opt/golang/current
-export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
-export GOBIN=$HOME/.golang/bin
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
 export JAVA_HOME=/opt/jdk/x64/current
 export M2_HOME=/opt/apache/maven/current
+# Go
+export GOROOT=/usr/lib/go
+export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
+export GOBIN=$HOME/.golang/bin
+# JS
+export NPM_CONFIG_PREFIX=$HOME/.npm
 
 ### PATH
 # No whitespaces before ":"!
@@ -68,7 +70,6 @@ export PATH=$PATH\
 :$M2_HOME/bin\
 :$ANDROID_HOME/tools\
 :$ANDROID_HOME/platform-tools\
-:$GOROOT/bin\
 :$GOBIN\
-:/opt/node/current/bin\
+:$NPM_CONFIG_PREFIX/bin\
 :/opt/google/appengine/go/current\
