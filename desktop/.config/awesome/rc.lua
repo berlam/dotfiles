@@ -50,7 +50,7 @@ end
 run_once("nm-applet")
 run_once("xfce4-power-manager")
 run_once("compton")
-run_once("unclutter -root")
+run_once("unclutter -root -idle 30 -notclass awesome")
 -- }}}
 
 -- {{{ Variable definitions
@@ -661,7 +661,17 @@ clientkeys = awful.util.table.join(
 	   {description = "toggle floating", group = "client"}),
 	awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
 	   {description = "move to master", group = "client"}),
-	awful.key({ modkey,           }, "o", function (c) c:move_to_screen() end,
+	awful.key({ modkey,           }, "o",
+	   function (c)
+		   -- Enable move for maximized clients
+		   local max_h = c.maximized_horizontal
+		   local max_v = c.maximized_vertical
+		   c.maximized_horizontal = false
+		   c.maximized_vertical = false
+		   c:move_to_screen()
+		   c.maximized_horizontal = max_h
+		   c.maximized_vertical = max_v
+	   end,
 	   {description = "move to screen", group = "client"}),
 	awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
 		{description = "toggle keep on top", group = "client"}),
