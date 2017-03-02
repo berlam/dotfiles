@@ -15,6 +15,7 @@ alias po=popd
 alias pu=pushd
 alias rd=rmdir
 alias bat='cat /sys/class/power_supply/BAT*/{status,capacity}'
+alias gogit='test -z "`git rev-parse --is-inside-work-tree 2> /dev/null`" || stow -R -v -d "`git rev-parse --show-toplevel`" -t "${GOPATH/:*/}/src" "src"'
 
 # stow wrapper
 _stow() {
