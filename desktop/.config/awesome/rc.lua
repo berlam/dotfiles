@@ -793,8 +793,15 @@ client.connect_signal("unmanage", function(c)
 	tag_bottom_bar_toggle_fn(c.screen)
 end)
 
--- Enable sloppy focus, so that focus follows mouse.
+-- Enable sloppy focus, so that focus follows mouse. Keep focus on Java dialogs.
 client.connect_signal("mouse::enter", function(c)
+	local focused = client.focus
+	-- Is the new window the same application as the currently focused one? (by comparing X window classes)
+	-- Are we currently focusing a Java Dialog?
+	-- Are we entering a Java Frame?
+	if focused and focused.class == c.class and focused.instance == "sun-awt-X11-XDialogPeer" and c.instance == "sun-awt-X11-XFramePeer" then
+		return
+	end
 	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
 		client.focus = c
 	end
