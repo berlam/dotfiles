@@ -3,13 +3,14 @@
 [ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
 [ -r ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 #Disable touchpad
-#xinput set-prop 10 137 0
-synclient touchpadoff=1
-#Faster mouse for HiDPI
-SCREEN_HEIGHT=`xrandr -q | egrep -o "primary[[:space:]]+[[:digit:]]+x" | egrep -o "[[:digit:]]+"`
-if [ "$SCREEN_HEIGHT" -gt 1920 ]; then
-	TRACKPOINT_DEVICE=`xinput --list | grep -i trackpoint | egrep -o "id=[[:digit:]]+" | egrep -o "[[:digit:]]+"`
-	TRACKPOINT_PROP=`xinput list-props "$TRACKPOINT_DEVICE" | grep -i "Device Accel Constant Deceleration" | egrep -o "\([[:digit:]]+\)" | egrep -o "[[:digit:]]+"`
-	xinput set-prop "$TRACKPOINT_DEVICE" "$TRACKPOINT_PROP" .25
-	xrandr --dpi 144
-fi
+[ -x /usr/bin/synclient ] && synclient touchpadoff=1
+#Start network manager applet
+[ -x /usr/bin/nm-applet ] && nm-applet&
+#Start power manager
+[ -x /usr/bin/xfce4-power-manager ] && xfce4-power-manager&
+#Start compton
+[ -x /usr/bin/compton ] && compton&
+#Start unclutter
+[ -x /usr/bin/unclutter ] && unclutter -root -idle 30 -notclass awesome&
+#Start awesome
+#[ -x /usr/bin/awesome ] && exec awesome
