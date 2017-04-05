@@ -1,37 +1,49 @@
 -- {{{ Required libraries
-local gears     = require("gears")
-local awful     = require("awful")
-require("awful.autofocus")
-local wibox     = require("wibox")
-local beautiful = require("beautiful")
-local naughty   = require("naughty")
-local lain      = require("lain")
---local menubar       = require("menubar")
+local gears         = require("gears")
+local awful         = require("awful")
+local wibox         = require("wibox")
+local beautiful     = require("beautiful")
+local naughty       = require("naughty")
+local lain          = require("lain")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local switcher  = require("awesome-switcher-preview")
-local awfs      = require("awesome-fullscreen")
+local switcher      = require("awesome-switcher-preview")
+local awfs          = require("awesome-fullscreen")
+require("awful.autofocus")
 require("awesome-remember-geometry")
+-- }}}
+
+-- {{{ Notifications
+local function log(msg)
+	naughty.notify({
+		preset = naughty.config.presets.normal,
+		title = "LOG",
+		text = msg
+	})
+end
+
+local function err(msg)
+	naughty.notify({
+		preset = naughty.config.presets.critical,
+		title = "ERROR",
+		text = msg
+	})
+end
 -- }}}
 
 -- {{{ Error handling
 if awesome.startup_errors then
-	naughty.notify({ preset = naughty.config.presets.critical,
-		title = "Oops, there were errors during startup!",
-		text = awesome.startup_errors
-	})
+	err(awesome.startup_errors)
 end
 
 do
 	local in_error = false
 	awesome.connect_signal("debug::error", function (err)
-		if in_error then return end
+		if in_error then
+			return
+		end
 		in_error = true
-
-		naughty.notify({
-		 preset = naughty.config.presets.critical,
-		 title = "Oops, an error happened!",
-		 text = tostring(err) })
+		err(tostring(err))
 		in_error = false
 	end)
 end
@@ -46,17 +58,12 @@ local function run_once(cmd)
 	end
 	awful.spawn.with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
 end
-
-run_once("nm-applet")
-run_once("xfce4-power-manager")
-run_once("compton")
-run_once("unclutter -root -idle 30 -notclass awesome")
 -- }}}
 
 -- {{{ Variable definitions
 
 -- beautiful init
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/berlam/theme.lua")
+beautiful.init(awful.util.get_configuration_dir() .. "themes/berlam/theme.lua")
 
 -- switcher
 function hex2rgba(hex)
@@ -541,6 +548,7 @@ awful.client.focus.bydirection("right")
 if client.focus then client.focus:raise() end
 ]]
 		   os.execute("dm-tool lock")
+		   --os.execute("scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -i /tmp/screenshotblur.png")
 	   end),
 	awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
 	   {description = "show main menu", group = "awesome"}),
