@@ -29,6 +29,10 @@ local function err(msg)
 		text = msg
 	})
 end
+
+local function debug(msg)
+	gears.debug.print_warning(msg)
+end
 -- }}}
 
 -- {{{ Error handling
