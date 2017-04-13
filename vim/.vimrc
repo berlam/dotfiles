@@ -30,6 +30,8 @@ set number
 set ic
 set hls
 set lbr
+"Fixing Vim's Background Color Erase for 256-color tmux and GNU screen
+set t_ut=
 "indents
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 "set list
