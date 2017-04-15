@@ -9,6 +9,7 @@ local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local switcher      = require("awesome-switcher-preview")
 local awfs          = require("awesome-fullscreen")
+local battery 	    = require("awesome-upower-battery")
 require("awful.autofocus")
 require("awesome-remember-geometry")
 -- }}}
@@ -38,12 +39,12 @@ end
 
 do
 	local in_error = false
-	awesome.connect_signal("debug::error", function (err)
+	awesome.connect_signal("debug::error", function(e)
 		if in_error then
 			return
 		end
 		in_error = true
-		err(tostring(err))
+		err(tostring(e))
 		in_error = false
 	end)
 end
@@ -212,32 +213,21 @@ local fsroot = lain.widgets.fs(
 
 -- Battery
 local baticon = wibox.widget.imagebox(beautiful.bat)
-local bat = lain.widgets.bat(
+local bat = battery(
 	{
-		batteries = { "BAT0", "BAT1", "BAT2" },
-		settings = function()
-			if bat_now.ac_status ~= 1 and bat_now.status ~= "Charging" then
-				local bat_count = 0
-				local bat_sum = 0
-				for i, status in pairs(bat_now.n_status) do
-					if status ~= "N/A" then
-						bat_count = bat_count + 1
-						bat_sum = bat_sum + bat_now.n_perc[i]
-					end
-				end
-				if bat_count > 0 then
-					-- At least one battery, combine all to a single value
-					local bat_perc = bat_sum / bat_count
-					if bat_perc <= 5 then
+		-- TODO find out how to make the bat_now value accessible like the other lain widgets
+		-- metatable?
+		settings = function(bat_now, widget)
+			if bat_now.status == "Discharging" then
+					if bat_now.perc <= 5 then
 						baticon:set_image(beautiful.bat_no)
-					elseif bat_perc <= 15 then
+					elseif bat_now.perc <= 15 then
 						baticon:set_image(beautiful.bat_low)	
 					else
 						baticon:set_image(beautiful.bat)
 					end
-					widget:set_markup(string.format("%3d", bat_perc) .. "% ")
+					widget:set_markup(string.format("%3d", bat_now.perc) .. "% ")
 					return
-				end
 			end
 			-- We must be on AC
 			baticon:set_image(beautiful.ac)

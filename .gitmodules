@@ -10,6 +10,10 @@
 	path = desktop/.config/awesome/awesome-remember-geometry
 	url = https://github.com/berlam/awesome-remember-geometry.git
 	branch = master
+[submodule "desktop/.config/awesome/awesome-upower-battery"]
+	path = desktop/.config/awesome/awesome-upower-battery
+	url = https://github.com/berlam/awesome-upower-battery.git
+	branch = master
 [submodule "desktop/.config/awesome/awesome-lenovo"]
 	path = desktop/.config/awesome/awesome-lenovo
 	url = https://github.com/berlam/awesome-lenovo.git
