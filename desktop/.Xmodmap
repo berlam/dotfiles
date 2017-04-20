@@ -1,12 +1,33 @@
+!Hints:
+!1. Use xev for keycode
+!2. See current mapping with xmodmap -pke
+
 !Capslock to Mode_switch
-!Enables one more keyboard level
-clear Lock 
+clear   Lock 
 keycode 66 = Mode_switch
-clear mod3
-clear mod5
-add mod3 = Mode_switch
-add mod5 = ISO_Level3_Shift
-!Mode_switch + Shift = Capslock
+!Capslock enables new keyboard layer
+clear   mod3
+add     mod3 = Mode_switch
+!AltGr enables new keyboard layer
+clear   mod5
+add     mod5 = ISO_Level3_Shift
+
+!Mode_switch + Escape = Caps Lock
+keycode  9 = Escape NoSymbol Caps_Lock
+!Mode_switch + Space = Return
+keycode 65 = space NoSymbol Return Return
+!HJKL
+keycode 43 = h H Left Home hstroke Hstroke hstroke
+keycode 44 = j J Down Next dead_belowdot dead_abovedot dead_belowdot
+keycode 45 = k K Up Prior kra ampersand kra
+keycode 46 = l L Right End lstroke Lstroke lstroke
+!Braces
+keycode 26 = e E parenleft parenleft EuroSign EuroSign EuroSign EuroSign e E EuroSign EuroSign e E EuroSign EuroSign
+keycode 27 = r R parenright parenright paragraph registered paragraph registered r R paragraph registered r R paragraph registered
+keycode 40 = d D braceleft braceleft eth ETH eth ETH d D eth ETH d D eth ETH
+keycode 41 = f F braceright braceright dstroke ordfeminine dstroke ordfeminine f F dstroke ordfeminine f F dstroke ordfeminine
+keycode 54 = c C bracketleft bracketleft cent copyright cent copyright c C cent copyright c C cent copyright
+keycode 55 = v V bracketright doublelowquotemark singlelowquotemark doublelowquotemark singlelowquotemark v V doublelowquotemark singlelowquotemark v V doublelowquotemark singlelowquotemark
 
 !Disable mouse middle click
 pointer = 1 25 3 4 5 6 7 8 9

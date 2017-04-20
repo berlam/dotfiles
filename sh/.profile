@@ -45,7 +45,7 @@ export GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 ### Programs
-export EDITOR=vim
+export EDITOR=nvim
 export BROWSER=google-chrome
 
 export LESSHISTFILE=/dev/null

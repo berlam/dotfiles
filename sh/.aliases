@@ -4,6 +4,8 @@
 # set aliases
 alias o='xdg-open >/dev/null 2>&1'
 
+alias hibernate='systemctl hibernate'
+alias suspend='systemctl suspend'
 alias history='fc -l 1'
 alias c='xclip -selection clipboard'
 alias l='ls -lah'

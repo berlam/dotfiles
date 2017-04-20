@@ -1,5 +1,4 @@
 if [[ ! $(tty) =~ ^/dev/tty[0-9]*$ ]]; then
-	TERM="xterm-256color"
 	AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
 	# PowerLevel9k
 	POWERLEVEL9K_PROMPT_ON_NEWLINE=true
