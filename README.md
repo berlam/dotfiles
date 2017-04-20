@@ -6,10 +6,6 @@ This includes general desktop and editor configs for a quick system setup.
 
 Best used with GNU stow.
 
-## atom
-* Keymap
-* Style
-
 ## desktop
 * Xmodmap
 * Fonts
