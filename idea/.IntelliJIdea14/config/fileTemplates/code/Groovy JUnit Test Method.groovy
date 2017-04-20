@@ -1,3 +1,0 @@
-void should${NAME}() {
-${BODY}
-}

@@ -1,0 +1,11 @@
+<list display="Custom2">
+  <action id="JumpToLastWindow" />
+  <action id="SelectIn" />
+  <action id="EditSource" />
+  <action id="GotoSuperMethod" />
+  <action id="GotoTypeDeclaration" />
+  <action id="RevealIn" />
+  <action id="QuickList.$Separator$" />
+  <action id="Vcs.UpdateProject" />
+  <action id="Git.Pull" />
+</list>

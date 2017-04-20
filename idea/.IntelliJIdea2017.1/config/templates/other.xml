@@ -1,0 +1,10 @@
+<templateSet group="other">
+  <template name="builder" value="public $BUILDER$ $SELECTION$($CLAZZ$ $SELECTION$) {&#10;  $ENTITY$.$SELECTION$ = $SELECTION$;&#10;  return this;&#10;}&#10;$END$" description="Wraps selection with a Builder" toReformat="false" toShortenFQNames="true">
+    <variable name="BUILDER" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <variable name="CLAZZ" expression="completeSmart()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ENTITY" expression="complete()" defaultValue="that" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+</templateSet>

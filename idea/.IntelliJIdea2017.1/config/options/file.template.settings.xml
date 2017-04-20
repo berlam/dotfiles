@@ -1,0 +1,7 @@
+<application>
+  <component name="ExportableFileTemplateSettings">
+    <includes_templates>
+      <template name="Lua File Header.lua" reformat="true" enabled="false" />
+    </includes_templates>
+  </component>
+</application>

@@ -1,0 +1,6 @@
+<templateSet group="SQL">
+  <template name="sela" value="select * from $table$ $alias$ where $alias$.$END$;" description="select * from table with alias" toReformat="true" toShortenFQNames="false">
+    <variable name="table" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <variable name="alias" expression="complete()" defaultValue="&quot;alias&quot;" alwaysStopAt="true" />
+  </template>
+</templateSet>
