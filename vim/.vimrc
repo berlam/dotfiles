@@ -1,70 +1,60 @@
+" Should be already the case but better safe than sorry
 set nocompatible
-filetype off
 
+" Disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
 if &term =~ '256color'
-	" disable Background Color Erase (BCE) so that color schemes
-	" render properly when inside 256-color tmux and GNU screen.
 	set t_ut=
 endif
 
-"set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'fatih/vim-go'
-Plugin 'vim-scripts/AutoClose'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'Blackrush/vim-gocode'
-""Plugin 'Shougo/neocomplete.vim'
-"All of the Plugins must be added before the following line
-call vundle#end()    
+" Plugins
+call plug#begin('~/.vim/bundle')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-markdown'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'airblade/vim-gitgutter'
+call plug#end()
 
-let g:GPGExecutable = "gpg2"
-filetype plugin indent on
+" Settings
 syntax on
+filetype plugin indent on
+
+" Theme
 let base16colorspace=256
 colorscheme base16-3024
-set background=dark
+
+" Relative line number in command mode
+" Absolute line number in insert mode
+set relativenumber
 set number
-set ic
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber 
+
+" Search case-insensitive when lowercase
+set smartcase
+
+" Highlight searched words
 set hls
-set lbr
-"Fixing Vim's Background Color Erase for 256-color tmux and GNU screen
-set t_ut=
-"indents
-"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-"set list
-"airline
+
+" Airline
 set laststatus=2
-"syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"airline
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-"syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"supertab
-let g:SuperTabDefaultCompletionType = "context"
-"tagbar
-let g:tagbar_usearrows = 1
-nnoremap <leader>l :TagbarToggle<CR>
 
-"tab
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>"
+" Keys
+" Space is the leader
+let mapleader = "\<Space>"
+" Open new file
+nnoremap <Leader>o :CtrlP<CR>
+" Save file
+nnoremap <Leader>w :w<CR>
+" remove markup from highlighted words
+nnoremap <esc><esc> :silent! nohls<cr>
