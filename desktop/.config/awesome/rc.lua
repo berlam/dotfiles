@@ -138,15 +138,6 @@ local function tag_bottom_bar_toggle_fn(screen)
 end
 -- }}}
 
--- {{{ Menu
-local myawesomemenu = {
-	{ "hotkeys", function() return false, hotkeys_popup.show_help end },
-	{ "manual", terminal .. " -e man awesome" },
-	{ "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-	{ "restart", awesome.restart },
-	{ "quit", function() awesome.quit() end }
-}
-
 -- {{{ Wibox
 local markup = lain.util.markup
 local separators = lain.util.separators
@@ -441,7 +432,6 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-	awful.button({ }, 3, function () mymainmenu:toggle() end),
 	awful.button({ }, 4, awful.tag.viewnext),
 	awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -653,6 +643,11 @@ clientkeys = awful.util.table.join(
 		   c:kill()
 	   end,
 	   {description = "close", group = "client"}),
+	awful.key({ modkey, "Control"   }, "space",
+	   function(c)
+		   c.floating = not c.floating
+	   end,
+	   {description = "toggle floating", group = "client"}),
 	awful.key({ modkey, "Control" }, "Return",
 	   function(c)
 		   c:swap(awful.client.getmaster())
