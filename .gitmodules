@@ -14,15 +14,7 @@
 	path = desktop/.config/awesome/awesome-upower-battery
 	url = https://github.com/berlam/awesome-upower-battery.git
 	branch = master
-[submodule "desktop/.config/awesome/awesome-lenovo"]
-	path = desktop/.config/awesome/awesome-lenovo
-	url = https://github.com/berlam/awesome-lenovo.git
-	branch = master
-[submodule "desktop/.config/awesome/freedesktop"]
-	path = desktop/.config/awesome/freedesktop
-	url = https://github.com/copycat-killer/awesome-freedesktop.git
-	branch = master
 [submodule "desktop/.config/awesome/lain"]
 	path = desktop/.config/awesome/lain
-	url = https://github.com/copycat-killer/lain.git
+	url = https://github.com/lcpz/lain.git
 	branch = master
