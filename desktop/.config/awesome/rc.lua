@@ -143,20 +143,32 @@ local markup = lain.util.markup
 local separators = lain.util.separators
 
 -- Textclock
+-- wibox.widget.textclock is ok but does not respect LC_DATE and LC_TIME.
+-- If you locale is the same as LC_DATE and LC_TIME, you will so no difference to the default widget.
+-- Caused by a call to g_locale_from_utf8.
 local clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-local clock = lain.widgets.abase(
-	{
-		timeout  = 60,
-		cmd      = "date +' %a %d %b %R '"
-	}
-)
+local clock = wibox.widget.textbox()
+local function clock_refresh()
+        awful.spawn.easy_async(
+            {"sh", "-c", "date +' %a %d %b %R '"},
+            function(out)
+                clock.text = out
+            end
+        )
+end
+clock_refresh()
+gears.timer {
+    timeout   = 60,
+    autostart = true,
+    callback  = clock_refresh
+}
 
--- calendar
-lain.widgets.calendar(
+-- Calendar
+lain.widget.calendar(
 	{
 		cal = "/usr/bin/ncal -h -w -3",
 		followtag = true,
-		attach_to = { clock.widget },
+		attach_to = { clock },
 		notification_preset = {
 			font = beautiful.font_name,
 			fg   = beautiful.fg_normal,
@@ -167,7 +179,7 @@ lain.widgets.calendar(
 
 -- MEM
 local memicon = wibox.widget.imagebox(beautiful.widget_mem)
-local mem = lain.widgets.mem(
+local mem = lain.widget.mem(
 	{
 		settings = function()
 			widget:set_text(" " .. string.format("%5d", mem_now.used) .. "MB ")
@@ -177,7 +189,7 @@ local mem = lain.widgets.mem(
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
-local cpu = lain.widgets.cpu(
+local cpu = lain.widget.cpu(
 	{
 		settings = function()
 			widget:set_text(" " .. string.format("%3d", cpu_now.usage) .. "% ")
@@ -187,7 +199,7 @@ local cpu = lain.widgets.cpu(
 
 -- / fs
 local fsicon = wibox.widget.imagebox(beautiful.widget_hdd)
-local fsroot = lain.widgets.fs(
+local fsroot = lain.widget.fs(
 	{
 		followtag = true,
 		options  = "--exclude-type=tmpfs",
@@ -206,9 +218,7 @@ local fsroot = lain.widgets.fs(
 local baticon = wibox.widget.imagebox(beautiful.bat)
 local bat = battery(
 	{
-		-- TODO find out how to make the bat_now value accessible like the other lain widgets
-		-- metatable?
-		settings = function(bat_now, widget)
+		settings = function()
 			if bat_now.status == "Discharging" then
 					if bat_now.perc <= 5 then
 						baticon:set_image(beautiful.bat_no)
@@ -229,7 +239,7 @@ local bat = battery(
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(beautiful.widget_vol)
-local volume = lain.widgets.alsa(
+local volume = lain.widget.alsa(
 	{
 		settings = function()
 			if volume_now.status == "off" then
@@ -250,7 +260,7 @@ local volume = lain.widgets.alsa(
 -- Net
 local neticon = wibox.widget.imagebox(beautiful.widget_net)
 neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
-local net = lain.widgets.net(
+local net = lain.widget.net(
 	{
 		settings = function()
 			widget:set_markup(
@@ -409,7 +419,7 @@ awful.screen.connect_for_each_screen(function(s)
 			net.widget,
 			arrl_ld,
 			wibox.container.background(clockicon, beautiful.bg_focus),
-			wibox.container.background(clock.widget, beautiful.bg_focus),
+			wibox.container.background(clock, beautiful.bg_focus),
 		},
 	}
 
