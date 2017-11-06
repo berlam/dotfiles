@@ -540,12 +540,12 @@ globalkeys = awful.util.table.join(
 	-- ###
 	awful.key({ altkey,           }, "Tab",
 	   function()
-		   switcher.switch(1, "Alt_L", "Tab", "ISO_Left_Tab")
+		   switcher.switch( 1, altkey, "Alt_L", "Shift", "Tab")
 	   end,
 	   {description = "next client", group = "client"}),
 	awful.key({ altkey, "Shift"   }, "Tab",
 	   function()
-		   switcher.switch(-1, "Alt_L", "Tab", "ISO_Left_Tab")
+		   switcher.switch(-1, altkey, "Alt_L", "Shift", "Tab")
 	   end,
 	   {description = "previous client", group = "client"}),
 	-- ###
