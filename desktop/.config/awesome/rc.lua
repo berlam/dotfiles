@@ -227,7 +227,7 @@ local bat = battery(
 					else
 						baticon:set_image(beautiful.bat)
 					end
-					widget:set_markup(string.format("%3d", bat_now.perc) .. "% ")
+					widget:set_markup(string.format("%3d", math.ceil(bat_now.perc)) .. "% ")
 					return
 			end
 			-- We must be on AC
@@ -264,9 +264,9 @@ local net = lain.widget.net(
 	{
 		settings = function()
 			widget:set_markup(
-				markup("#7AC82E", string.format("%4d", net_now.received))
+				markup("#7AC82E", string.format("%4d", math.ceil(net_now.received)))
 				.. " " ..
-				markup("#46A8C3", string.format("%4d", net_now.sent))
+				markup("#46A8C3", string.format("%4d", math.ceil(net_now.sent)))
 				.. " "
 			)
 		end
