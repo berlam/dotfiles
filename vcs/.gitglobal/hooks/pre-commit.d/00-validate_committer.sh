@@ -44,11 +44,20 @@ fi
 #
 # Set values, if not empty and different to previous.
 #
+PRE_COMMIT_USER_CHANGE=false
 if [ -n "$GIT_NAME" ] && [ "$GIT_NAME" != "`\"$GIT_PATH\" config user.name`" ]; then
-	"$GIT_PATH" config --replace-all user.name "$GIT_NAME"
+	"$GIT_PATH" config --local --replace-all user.name "$GIT_NAME"
+	echo "Setting user.name to \"$GIT_NAME\""
+	PRE_COMMIT_USER_CHANGE=true
 fi
 if [ -n "$GIT_EMAIL" ] && [ "$GIT_EMAIL" != "`\"$GIT_PATH\" config user.email`" ]; then
-	"$GIT_PATH" config --replace-all user.email "$GIT_EMAIL"
+	"$GIT_PATH" config --local --replace-all user.email "$GIT_EMAIL"
+	echo "Setting user.email to \"$GIT_EMAIL\""
+	PRE_COMMIT_USER_CHANGE=true
+fi
+if [ "$PRE_COMMIT_USER_CHANGE" = true ]; then
+	echo "Please retry commit!"
+	exit 1
 fi
 
 echo "Commit as \"$GIT_NAME ($GIT_EMAIL)\""
