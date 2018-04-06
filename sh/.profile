@@ -55,8 +55,8 @@ export LESSHISTFILE=/dev/null
 export ANDROID_HOME=$HOME/android-sdk-linux
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
-export JAVA_HOME=/opt/jdk/x64/current
-export M2_HOME=/opt/apache/maven/current
+export JAVA_HOME=$(readlink -f `which javac` | sed "s:/bin/javac::")
+export M2_HOME=$(readlink -f `which mvn` | sed "s:/bin/mvn::")
 # Go
 export GOROOT=/usr/lib/go
 export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
