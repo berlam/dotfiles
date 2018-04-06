@@ -12,5 +12,7 @@
 [ -x /usr/bin/compton ] && compton&
 #Start unclutter
 [ -x /usr/bin/unclutter ] && unclutter -root -idle 30 -notclass awesome&
+#Start autostart applications
+[ -x /usr/bin/exo-open ] && exo-open "${XDG_CONFIG_HOME:-"$HOME/.config"}"/autostart/*
 #Start awesome
 #[ -x /usr/bin/awesome ] && exec awesome
