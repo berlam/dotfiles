@@ -759,13 +759,33 @@ awful.rules.rules = {
 		properties = {
 			border_width = beautiful.border_width,
 			border_color = beautiful.border_normal,
-			focus = awful.client.focus.filter,
-			raise = true,
 			keys = clientkeys,
 			buttons = clientbuttons,
+			raise = true,
 			screen = awful.screen.preferred,
-			placement = awful.placement.no_overlap+awful.placement.no_offscreen+awful.placement.centered,
-			size_hints_honor = false
+			placement = awful.placement.no_overlap+awful.placement.no_offscreen+awful.placement.centered
+		}
+	},
+	{
+		-- IntelliJ has dialogs, which shall not get focus, e.g. open type or open resource.
+		-- These are Java Dialogs, which are not X11 Dialog Types.
+		rule_any = {
+			instance = { "sun-awt-X11-XWindowPeer", "sun-awt-X11-XDialogPeer", "keybase" }
+		},
+		properties = {
+			focusable = false,
+			placement = awful.placement.under_mouse+awful.placement.no_offscreen
+		}
+	},
+	{
+		-- IntelliJ has dialogs, which do not get focus, e.g. Settings Dialog or Paste Dialog.
+		rule = {
+			type = "dialog",
+			instance = "sun-awt-X11-XDialogPeer"
+		},
+		properties = {
+			focusable = true,
+			focus = true
 		}
 	}
 }
@@ -797,9 +817,11 @@ end)
 client.connect_signal("mouse::enter", function(c)
 	local focused = client.focus
 	-- Is the new window the same application as the currently focused one? (by comparing X window classes)
-	-- Are we currently focusing a Java Dialog?
-	-- Are we entering a Java Frame?
-	if focused and focused.class == c.class and focused.instance == "sun-awt-X11-XDialogPeer" and c.instance == "sun-awt-X11-XFramePeer" then
+	-- Are we currently focusing a Java Frame, Window or Dialog and want to switch focus inside that group?
+	local isJavaInstance = function(instance)
+		return string.match(instance, "^sun-awt-X11-X")
+	end
+	if focused and focused.class == c.class and isJavaInstance(focused.instance) and isJavaInstance(c.instance) then
 		return
 	end
 	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
