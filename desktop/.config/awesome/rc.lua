@@ -121,18 +121,32 @@ local function client_menu_toggle_fn()
 end
 
 local function tag_bottom_bar_toggle_fn(screen)
-	local clients = screen.selected_tag:clients()
-	screen.mybotwibox.visible = #clients > 1
-	for _, c in pairs(clients) do
-		-- refresh width
-		if c.maximized_horizontal then
-			c.maximized_horizontal = false
-			c.maximized_horizontal = true
+	if not screen then
+		return
+	end
+	-- One screen can have multiple selected tags
+	local tags = screen.selected_tags
+	for _, t in pairs(tags) do
+		local clients = t:clients()
+		local taskbarItems = 0
+		for _, c in pairs(clients) do
+			-- refresh width
+			if c.maximized_horizontal then
+				c.maximized_horizontal = false
+				c.maximized_horizontal = true
+			end
+			-- refresh height
+			if c.maximized_vertical then
+				c.maximized_vertical = false
+				c.maximized_vertical = true
+			end
+			-- check for taskbar items
+			if not c.skip_taskbar then
+				taskbarItems = taskbarItems + 1
+			end
 		end
-		-- refresh height
-		if c.maximized_vertical then
-			c.maximized_vertical = false
-			c.maximized_vertical = true
+		if screen.mybotwibox then
+			screen.mybotwibox.visible = taskbarItems > 1
 		end
 	end
 end
@@ -375,7 +389,7 @@ awful.screen.connect_for_each_screen(function(s)
 					 end, tasklist_buttons)
 	s.mytasklist = awful.widget.tasklist(s,
 					 function (c, screen)
-						 return not awful.widget.tasklist.filter.focused(c, screen) and awful.widget.tasklist.filter.currenttags(c, screen)
+						 return not awful.widget.tasklist.filter.focused(c, screen) and awful.widget.tasklist.filter.currenttags(c, screen) and not c.skip_taskbar
 					 end, tasklist_buttons)
 
 	-- Create the top wibox
@@ -523,16 +537,12 @@ globalkeys = awful.util.table.join(
 	-- ###
 	awful.key({ modkey,           }, "Tab",
 	   function()
-		   local s = mouse.screen
-		   awful.tag.viewnext(s)
-		   tag_bottom_bar_toggle_fn(s)
+		   awful.tag.viewnext(mouse.screen)
 	   end,
 	   {description = "next tag", group = "tag"}),
 	awful.key({ modkey, "Shift"   }, "Tab",
 	   function()
-		   local s = mouse.screen
-		   awful.tag.viewprev(s)
-		   tag_bottom_bar_toggle_fn(s)
+		   awful.tag.viewprev(mouse.screen)
 	   end,
 	   {description = "previous tag", group = "tag"}),
 	-- ###
@@ -763,7 +773,8 @@ awful.rules.rules = {
 			buttons = clientbuttons,
 			raise = true,
 			screen = awful.screen.preferred,
-			placement = awful.placement.no_overlap+awful.placement.no_offscreen+awful.placement.centered
+			focus = awful.client.focus.filter,
+			placement = awful.placement.centered
 		}
 	},
 	{
@@ -792,25 +803,31 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
+-- Toggle the bottom bar if client is tagged
+tag.connect_signal("tagged", function(t)
+	tag_bottom_bar_toggle_fn(t.screen)
+end)
+-- Toggle the bottom bar if client is untagged
+tag.connect_signal("untagged", function(t)
+	tag_bottom_bar_toggle_fn(t.screen)
+end)
+-- Toggle the bottom bar if selected tag changes
+tag.connect_signal("property::selected", function(t)
+	tag_bottom_bar_toggle_fn(t.screen)
+end)
+
+-- Prevent clients from being unreachable after screen count changes
+client.connect_signal("property::screen", function(c)
+	awful.placement.no_offscreen(c)
+end)
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
-	-- Set the windows at the slave,
-	-- i.e. put it at the end of others instead of setting it master.
-	-- if not awesome.startup then awful.client.setslave(c) end
-
+	-- Prevent clients from being unreachable after screen count changes
 	if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
 		-- Prevent clients from being unreachable after screen count changes.
 		awful.placement.no_offscreen(c)
 	end
-
-	-- show bottom bar when more than one client is on screen.
-	tag_bottom_bar_toggle_fn(c.screen)
-end)
-
--- signal function to execute when a new client disappears.
-client.connect_signal("unmanage", function(c)
-	-- hide bottom bar when only one client is on screen.
-	tag_bottom_bar_toggle_fn(c.screen)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse. Keep focus on Java dialogs.
@@ -826,14 +843,6 @@ client.connect_signal("mouse::enter", function(c)
 	end
 	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
 		client.focus = c
-	end
-end)
-
--- Toggle bottom bar on screen change
-client.connect_signal("request::tag", function(c)
-	-- Loop screens, as we have not the old screen available
-	for s in screen do
-		tag_bottom_bar_toggle_fn(s)
 	end
 end)
 
