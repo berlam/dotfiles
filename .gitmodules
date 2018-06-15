@@ -1,6 +1,6 @@
-[submodule "desktop/.config/awesome/awesome-switcher-preview"]
-	path = desktop/.config/awesome/awesome-switcher-preview
-	url = https://github.com/berlam/awesome-switcher-preview.git
+[submodule "desktop/.config/awesome/awesome-switcher"]
+	path = desktop/.config/awesome/awesome-switcher
+	url = https://github.com/berlam/awesome-switcher.git
 	branch = master
 [submodule "desktop/.config/awesome/awesome-fullscreen"]
 	path = desktop/.config/awesome/awesome-fullscreen

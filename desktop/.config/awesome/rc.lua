@@ -7,7 +7,7 @@ local naughty       = require("naughty")
 local lain          = require("lain")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local switcher      = require("awesome-switcher-preview")
+local switcher      = require("awesome-switcher")
 local awfs          = require("awesome-fullscreen")
 local battery 	    = require("awesome-upower-battery")
 require("awful.autofocus")
