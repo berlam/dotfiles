@@ -63,6 +63,8 @@ export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
 export GOBIN=$HOME/.golang/bin
 # JS
 export NPM_CONFIG_PREFIX=$HOME/.npm
+# dotNet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 ### PATH
 # No whitespaces before ":"!
