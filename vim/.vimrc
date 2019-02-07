@@ -1,6 +1,12 @@
 " Should be already the case but better safe than sorry
 set nocompatible
 
+" Use system clipboard
+set clipboard=unnamedplus
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
 " Disable Background Color Erase (BCE) so that color schemes
 " render properly when inside 256-color tmux and GNU screen.
 if &term =~ '256color'
@@ -14,6 +20,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -37,6 +44,13 @@ set relativenumber
 set number
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber 
+
+" netrw tree
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 " Search case-insensitive when lowercase
 set smartcase
