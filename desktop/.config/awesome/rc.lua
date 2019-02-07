@@ -56,7 +56,7 @@ end
 beautiful.init(awful.util.get_configuration_dir() .. "themes/berlam/theme.lua")
 
 -- switcher
-function hex2rgba(hex)
+local function hex2rgba(hex)
 	local hex = hex:gsub("#","")
 	return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6)), 1
 end
@@ -74,7 +74,7 @@ local terminal   = "sakura" or "urxvtc" or "xterm"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
 -- user defined
-local browser    = "google-chrome" or "firefox" or "chromium"
+local browser    = os.getenv("BROWSER") or "google-chrome" or "firefox" or "chromium"
 local gui_editor = "code" or "atom" or "gvim"
 local graphics   = "gimp"
 local tagnames   = { "", "!#" }
@@ -273,7 +273,7 @@ local volume = lain.widget.alsa(
 
 -- Net
 local neticon = wibox.widget.imagebox(beautiful.widget_net)
-neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
+neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.spawn_with_shell(iptraf) end)))
 local net = lain.widget.net(
 	{
 		settings = function()
@@ -305,9 +305,7 @@ local taglist_buttons = awful.util.table.join(
 		if client.focus then
 			client.focus:toggle_tag(t)
 		end
-	end),
-	awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-	awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+	end)
 )
 
 local tasklist_buttons = awful.util.table.join(
@@ -327,9 +325,7 @@ local tasklist_buttons = awful.util.table.join(
 			c:raise()
 		end
 	end),
-	awful.button({ }, 3, client_menu_toggle_fn()),
-	awful.button({ }, 4, function () awful.client.focus.byidx(1) end),
-	awful.button({ }, 5, function () awful.client.focus.byidx(-1) end)
+	awful.button({ }, 3, client_menu_toggle_fn())
 )
 
 -- awfs
@@ -468,32 +464,32 @@ globalkeys = awful.util.table.join(
 	-- ###
 	awful.key({                    }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -o gimp", false)
+		   awful.spawn("xfce4-screenshooter -o gimp", false)
 	   end,
 	   {description = "take a screenshot", group = "screenshot"}),
 	awful.key({ altkey,            }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -o gimp -w", false)
+		   awful.spawn("xfce4-screenshooter -o gimp -w", false)
 	   end,
 	   {description = "take a screenshot of a window", group = "screenshot"}),
 	awful.key({ "Shift",           }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -o gimp -r", false)
+		   awful.spawn("xfce4-screenshooter -o gimp -r", false)
 	   end,
 	   {description = "take a screenshot of an area", group = "screenshot"}),
 	awful.key({ "Control",         }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -c", false)
+		   awful.spawn("xfce4-screenshooter -c", false)
 	   end,
 	   {description = "copy a screenshot to the clipboard", group = "screenshot"}),
 	awful.key({ "Control", altkey  }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -c -w", false)
+		   awful.spawn("xfce4-screenshooter -c -w", false)
 	   end,
 	   {description = "copy a screenshot of a window to the clipboard", group = "screenshot"}),
 	awful.key({ "Shift", "Control" }, "Print",
 	   function()
-		   awful.util.spawn("xfce4-screenshooter -c -r", false)
+		   awful.spawn("xfce4-screenshooter -c -r", false)
 	   end,
 	   {description = "copy a screenshot of an area to the clipboard", group = "screenshot"}),
 	-- ###
@@ -637,8 +633,7 @@ globalkeys = awful.util.table.join(
 	-- ###
 	awful.key({ modkey }, "l",
 	   function()
-		   os.execute("dm-tool lock")
-		   --os.execute("scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -i /tmp/screenshotblur.png")
+		   os.execute("sync && xautolock -locknow")
 	   end,
 	   {description = "lock screen", group = "awesome"}),
 	-- ###
