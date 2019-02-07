@@ -47,7 +47,7 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 ### Programs
 export EDITOR=nvim
-export BROWSER=google-chrome
+export BROWSER=firefox
 
 export LESSHISTFILE=/dev/null
 
@@ -76,3 +76,7 @@ export PATH=$PATH\
 :$GOBIN\
 :$NPM_CONFIG_PREFIX/bin\
 :/opt/google/appengine/go/current\
+
+if test -z "$DISPLAY" -a $XDG_VTNR = 1; then
+	exec startx
+fi

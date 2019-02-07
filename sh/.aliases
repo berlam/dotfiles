@@ -46,6 +46,7 @@ purge() {
 		;;
 		git)
 			git reset --hard
+			git clean -fd
 		;;
 		svn)
 			if [ $(command -v cygpath >/dev/null) ]; then
@@ -61,4 +62,31 @@ purge() {
 			docker volume rm `docker volume ls -qf dangling=true`
 		;;
 	esac
+}
+
+_dockerify() {
+	if [ "$(pwd)" != '/' ]; then
+		VOLUMES="-v $(pwd):$(pwd)"
+	fi
+	if [ -n "$HOME" ]; then
+		VOLUMES="$VOLUMES -v $HOME:$HOME -v $HOME:/root"
+	fi
+
+	# Only allocate tty if we detect one
+	if [ -t 1 ]; then
+    		DOCKER_RUN_OPTIONS="-t"
+	fi
+	if [ -t 0 ]; then
+   		DOCKER_RUN_OPTIONS="-it"
+	fi
+
+	echo "$DOCKER_RUN_OPTIONS $VOLUMES"
+}
+
+gcloud() {
+	docker run --rm $(_dockerify) -v /usr/lib/go:/usr/lib/go -w $(pwd) --volumes-from gcloud-config google/cloud-sdk gcloud "$@"
+}
+
+pdf() {
+	docker run --rm $(_dockerify) -v "$PWD":/data -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY frankwolf/master-pdf-editor
 }

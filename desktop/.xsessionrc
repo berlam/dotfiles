@@ -1,9 +1,12 @@
 #!/bin/sh
+xset -b
 [ -r ~/.profile ] && . ~/.profile
 [ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
 [ -r ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+#Setup CapsLock to Modifier and Escape
+#[ -x /usr/bin/xcape ] && xcape -e ""
 #Disable touchpad
-[ -x /usr/bin/synclient ] && synclient touchpadoff=1
+xinput --list --name-only | grep -i "TouchPad" | xargs -I{} -r xinput disable "{}"
 #Start network manager applet
 [ -x /usr/bin/nm-applet ] && nm-applet&
 #Start power manager
@@ -11,8 +14,18 @@
 #Start compton
 [ -x /usr/bin/compton ] && compton&
 #Start unclutter
-[ -x /usr/bin/unclutter ] && unclutter -root -idle 30 -notclass awesome&
+[ -x /usr/bin/unclutter ] && unclutter \
+	-root \
+	-idle 30 \
+	-notclass awesome&
+#Start xautolock
+[ -x /usr/bin/xautolock ] && xautolock \
+	-detectsleep \
+	-time 3 \
+	-locker "scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -i /tmp/screenshotblur.png -d -c 000070" \
+	-notify 30 \
+	-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"&
 #Start autostart applications
 [ -x /usr/bin/exo-open ] && exo-open "${XDG_CONFIG_HOME:-"$HOME/.config"}"/autostart/*
 #Start awesome
-#[ -x /usr/bin/awesome ] && exec awesome
+[ -x /usr/bin/awesome ] && exec awesome
