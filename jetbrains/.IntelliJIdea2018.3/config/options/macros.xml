@@ -1,0 +1,9 @@
+<application>
+  <component name="ActionMacroManager">
+    <macro name="Copyright/ Imports/ Save">
+      <action id="GenerateCopyright" />
+      <action id="OptimizeImports" />
+      <action id="SaveAll" />
+    </macro>
+  </component>
+</application>

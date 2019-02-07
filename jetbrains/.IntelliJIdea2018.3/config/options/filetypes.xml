@@ -1,0 +1,22 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <ignoreFiles list="*.hprof;*.pyc;*.pyo;*.rbc;*~;.DS_Store;.git;.hg;.svn;CVS;RCS;SCCS;__pycache__;_svn;rcs;vssver.scc;vssver2.scc;" />
+    <extensionMap>
+      <mapping ext="klib" type="ARCHIVE" />
+      <mapping ext="gz" type="Native" />
+      <mapping pattern="empty_bat" type="PLAIN_TEXT" />
+      <mapping pattern="multiple_cmd_bat" type="PLAIN_TEXT" />
+      <mapping pattern="LICENSE-jgit" type="PLAIN_TEXT" />
+      <mapping pattern="null" type="PLAIN_TEXT" />
+      <mapping pattern="LICENSE-aws" type="PLAIN_TEXT" />
+      <mapping pattern="empty_sh" type="PLAIN_TEXT" />
+      <mapping pattern="LICENSE" type="PLAIN_TEXT" />
+      <mapping pattern="multiple_cmd_sh" type="PLAIN_TEXT" />
+      <mapping ext="fnt" type="PLAIN_TEXT" />
+      <mapping ext="md" type="PLAIN_TEXT" />
+      <mapping ext="conf" type="PLAIN_TEXT" />
+      <mapping ext="template" type="PLAIN_TEXT" />
+      <mapping ext="atlas" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>

@@ -1,0 +1,57 @@
+<application>
+  <component name="DefaultFont">
+    <option name="FONT_SIZE" value="18" />
+    <option name="FONT_FAMILY" value="Fantasque Sans Mono" />
+    <option name="LINE_SPACING" value="1.2" />
+  </component>
+  <component name="EditorSettings">
+    <option name="languageBreadcrumbsMap">
+      <map>
+        <entry key="CSS" value="true" />
+        <entry key="FTL" value="true" />
+        <entry key="Groovy" value="true" />
+        <entry key="HTML" value="true" />
+        <entry key="Haml" value="true" />
+        <entry key="JAVA" value="true" />
+        <entry key="JSON" value="true" />
+        <entry key="JSP" value="true" />
+        <entry key="JSPX" value="true" />
+        <entry key="JavaScript" value="true" />
+        <entry key="LESS" value="true" />
+        <entry key="SASS" value="true" />
+        <entry key="SCSS" value="true" />
+        <entry key="TypeScript" value="true" />
+        <entry key="VTL" value="true" />
+        <entry key="XHTML" value="true" />
+        <entry key="XML" value="true" />
+        <entry key="go" value="true" />
+        <entry key="kotlin" value="true" />
+        <entry key="yaml" value="true" />
+      </map>
+    </option>
+    <option name="USE_SOFT_WRAPS" value="" />
+    <option name="STRIP_TRAILING_SPACES" value="Whole" />
+    <option name="IS_ENSURE_NEWLINE_AT_EOF" value="true" />
+    <option name="QUICK_DOC_ON_MOUSE_OVER_DELAY_MS" value="100" />
+    <option name="SHOW_BREADCRUMBS_ABOVE" value="true" />
+    <option name="SHOW_BREADCRUMBS" value="false" />
+    <option name="IS_CAMEL_WORDS" value="true" />
+    <option name="IS_MOUSE_CLICK_SELECTION_HONORS_CAMEL_WORDS" value="false" />
+    <option name="SHOW_PARAMETER_NAME_HINTS" value="false" />
+  </component>
+  <component name="LiveEditOptions" nodeUpdateOnChanges="true" useJBChromeExtension="true" />
+  <component name="TodoConfiguration">
+    <pattern pattern="\btodo\b.*" />
+    <pattern icon="important" pattern="\bfixme\b.*" />
+    <pattern pattern="\btodo m(be|ro)?\b.*" />
+    <pattern pattern="\btodo matthias.(berla|rosenstock)\b.*" />
+    <pattern icon="important" pattern="\bfixme m(be|ro)?\.*" />
+    <pattern icon="important" pattern="\bfixme matthias.(berla|rosenstock)\b" />
+    <filter name="TODO">
+      <pattern index="5" />
+      <pattern index="4" />
+      <pattern index="2" />
+      <pattern index="3" />
+    </filter>
+  </component>
+</application>
