@@ -1,14 +1,21 @@
 [Default Applications]
-x-scheme-handler/mailto=google-chrome.desktop
-application/pdf=google-chrome.desktop
+application/pdf=firefox.desktop
 image/jpeg=mirage.desktop
 image/gif=mirage.desktop
 image/png=mirage.desktop
 inode/directory=explorer.desktop
-x-scheme-handler/trash=google-chrome.desktop
-x-scheme-handler/http=google-chrome.desktop
-x-scheme-handler/https=google-chrome.desktop
-text/html=google-chrome.desktop
+x-scheme-handler/trash=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+text/html=firefox.desktop
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
+x-scheme-handler/ftp=firefox.desktop
+x-scheme-handler/chrome=firefox.desktop
+application/x-extension-htm=firefox.desktop
+application/x-extension-html=firefox.desktop
+application/x-extension-shtml=firefox.desktop
+application/xhtml+xml=firefox.desktop
+application/x-extension-xhtml=firefox.desktop
+application/x-extension-xht=firefox.desktop
