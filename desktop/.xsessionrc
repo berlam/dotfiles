@@ -6,7 +6,7 @@ xset -b
 #Setup CapsLock to Modifier and Escape
 #[ -x /usr/bin/xcape ] && xcape -e ""
 #Disable touchpad
-xinput --list --name-only | grep -i "TouchPad" | xargs -I{} -r xinput disable "{}"
+xinput --list --name-only | egrep -i "Synaptics|TouchPad" | xargs -I{} -r xinput disable "{}"
 #Start network manager applet
 [ -x /usr/bin/nm-applet ] && nm-applet&
 #Start power manager
