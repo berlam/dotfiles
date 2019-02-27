@@ -52,6 +52,7 @@ export BROWSER=firefox
 export LESSHISTFILE=/dev/null
 
 ### Dev
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
 export ANDROID_HOME=$HOME/android-sdk-linux
 # Java
 export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
