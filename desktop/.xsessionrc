@@ -22,7 +22,7 @@ xinput --list --name-only | egrep -i "Synaptics|TouchPad" | xargs -I{} -r xinput
 [ -x /usr/bin/xautolock ] && xautolock \
 	-detectsleep \
 	-time 3 \
-	-locker "scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -i /tmp/screenshotblur.png -d -c 000070" \
+	-locker "scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -n -i /tmp/screenshotblur.png -d -c 000070" \
 	-notify 30 \
 	-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"&
 #Start autostart applications
