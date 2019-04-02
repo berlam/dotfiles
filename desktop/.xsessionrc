@@ -27,5 +27,7 @@ xinput --list --name-only | egrep -i "Synaptics|TouchPad" | xargs -I{} -r xinput
 	-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"&
 #Start autostart applications
 [ -x /usr/bin/exo-open ] && exo-open "${XDG_CONFIG_HOME:-"$HOME/.config"}"/autostart/*
+#Start autorandr
+[ -x /usr/bin/autorandr ] && autorandr -c
 #Start awesome
 [ -x /usr/bin/awesome ] && exec awesome
