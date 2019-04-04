@@ -18,13 +18,10 @@ xinput --list --name-only | egrep -i "Synaptics|TouchPad" | xargs -I{} -r xinput
 	-root \
 	-idle 30 \
 	-notclass awesome&
-#Start xautolock
-[ -x /usr/bin/xautolock ] && xautolock \
-	-detectsleep \
-	-time 3 \
-	-locker "scrot /tmp/screenshot.png && convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png && i3lock -n -i /tmp/screenshotblur.png -d -c 000070" \
-	-notify 30 \
-	-notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"&
+#Start xss-lock
+[ -x /usr/bin/xss-lock ] && xset s 180 30 && xss-lock \
+	-n "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" \
+	-- sh -c "scrot -z -e 'convert \$f -blur 0x5 \$f && i3lock -n -i \$f && rm -f \$f' /tmp/lockscreen.png"&
 #Start autostart applications
 [ -x /usr/bin/exo-open ] && exo-open "${XDG_CONFIG_HOME:-"$HOME/.config"}"/autostart/*
 #Start autorandr
