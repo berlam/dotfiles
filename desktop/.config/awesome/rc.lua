@@ -633,7 +633,7 @@ globalkeys = awful.util.table.join(
 	-- ###
 	awful.key({ modkey }, "l",
 	   function()
-		   os.execute("sync && loginctl lock-session")
+		   os.execute("sync && xautolock -locknow")
 	   end,
 	   {description = "lock screen", group = "awesome"}),
 	-- ###
