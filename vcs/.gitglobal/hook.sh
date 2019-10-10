@@ -1,19 +1,15 @@
 #!/bin/bash
 
+export GIT_DIR=${GIT_DIR-`git rev-parse --git-common-dir`}
 # Runs all executable hookname.d/* hooks and exits after,
 # if any of them was not successful.
 exitcodes=()
 hookname="`basename $0`"
 hookpath="`git config core.hooksPath`"
 
-# Fallback to default hooks location
-if [ -z "$hookpath" ]; then
-	hookpath="$GIT_DIR/hooks"
-fi
-
 ## For each hook  
-for hook in $hookpath/$hookname.d/*; do
-	if test -x "$hook"; then
+for hook in $hookpath/$hookname.d/* "$GIT_DIR/hooks/$hookname"; do
+	if [ -x "$hook" ]; then
 		$hook "$@"
 		exitcode=$?
 		exitcodes+=($exitcode)
@@ -25,7 +21,7 @@ done
 # echo $statusarray
 for exitcode in ${exitcodes[@]}
 do
-	if test $exitcode -ne 0; then
+	if [ $exitcode -ne 0 ]; then
 		exit $exitcode
 	fi
 done
