@@ -1,4 +1,5 @@
 if [[ ! $(tty) =~ ^/dev/tty[0-9]*$ ]]; then
+
 	AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0'
 	# PowerLevel9k
 	POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -10,7 +11,7 @@ fi
 SHELL_INIT_FILE="$HOME/.zgen/zgen.zsh"
 [ ! -s "$SHELL_INIT_FILE" ] && git clone https://github.com/tarjoilija/zgen.git "$HOME/.zgen"
 [ -r "$SHELL_INIT_FILE" ] && . "$SHELL_INIT_FILE"
-SHELL_COLORS="$HOME/.ztheme/base16-3024.dark.sh"
+SHELL_COLORS="$HOME/.ztheme/current"
 [ -r "$SHELL_COLORS" ] && . "$SHELL_COLORS"
 
 # Options

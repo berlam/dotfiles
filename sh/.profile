@@ -44,6 +44,8 @@ export LC_IDENTIFICATION="en_US.UTF-8"
 export GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 ### HiDPI
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+### VDPAU
+export VDPAU_DRIVER=va_gl
 
 ### Programs
 export EDITOR=nvim
@@ -53,19 +55,22 @@ export LESSHISTFILE=/dev/null
 
 ### Dev
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
-export ANDROID_HOME=$HOME/android-sdk-linux
+export ANDROID_HOME="$HOME/android-sdk-linux"
 # Java
-export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dsun.java2d.xrender=true"
+export _JAVA_OPTS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
 export JAVA_HOME=$(readlink -f `which javac` | sed "s:/bin/javac::")
 export M2_HOME=$(readlink -f `which mvn` | sed "s:/bin/mvn::")
 # Go
 export GOROOT=/usr/lib/go
-export GOPATH=$HOME/.golang:/opt/google/appengine/go/current/gopath
-export GOBIN=$HOME/.golang/bin
+export GOBIN="$HOME/.golang/bin"
+# Rust
+export CARGO_HOME="$HOME/.cargo"
 # JS
-export NPM_CONFIG_PREFIX=$HOME/.npm
+export NVM_DIR="$HOME/.nvm"
 # dotNet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 ### PATH
 # No whitespaces before ":"!
@@ -75,9 +80,13 @@ export PATH=$PATH\
 :$ANDROID_HOME/tools\
 :$ANDROID_HOME/platform-tools\
 :$GOBIN\
+:$CARGO_HOME/bin\
 :$NPM_CONFIG_PREFIX/bin\
 :/opt/google/appengine/go/current\
+:$HOME/.local/share/JetBrains/Toolbox/apps\
 
-if test -z "$DISPLAY" -a $XDG_VTNR = 1; then
+if [ -z "$DISPLAY" -a $XDG_VTNR = 1 ]; then
 	exec startx
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
