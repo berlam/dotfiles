@@ -70,7 +70,7 @@ switcher.settings.preview_box_title_color = {hex2rgba(beautiful.fg_focus)}
 -- common
 local modkey     = "Mod4"
 local altkey     = "Mod1"
-local terminal   = "sakura" or "urxvtc" or "xterm"
+local terminal   = "alacritty" or "urxvtc" or "xterm"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
 -- user defined
@@ -163,18 +163,18 @@ local separators = lain.util.separators
 local clockicon = wibox.widget.imagebox(beautiful.widget_clock)
 local clock = wibox.widget.textbox()
 local function clock_refresh()
-        awful.spawn.easy_async(
-            {"sh", "-c", "date +' %a %d %b %R '"},
-            function(out)
-                clock.text = out
-            end
-        )
+	awful.spawn.easy_async(
+		{"sh", "-c", "date +' %a %d %b %R '"},
+		function(out)
+			clock.text = out
+		end
+	)
 end
 clock_refresh()
 gears.timer {
-    timeout   = 60,
-    autostart = true,
-    callback  = clock_refresh
+	timeout   = 60,
+	autostart = true,
+	callback  = clock_refresh
 }
 
 -- Calendar
@@ -234,15 +234,15 @@ local bat = battery(
 	{
 		settings = function()
 			if bat_now.status == "Discharging" then
-					if bat_now.perc <= 5 then
-						baticon:set_image(beautiful.bat_no)
-					elseif bat_now.perc <= 15 then
-						baticon:set_image(beautiful.bat_low)	
-					else
-						baticon:set_image(beautiful.bat)
-					end
-					widget:set_markup(string.format("%3d", math.ceil(bat_now.perc)) .. "% ")
-					return
+				if bat_now.perc <= 5 then
+					baticon:set_image(beautiful.bat_no)
+				elseif bat_now.perc <= 15 then
+					baticon:set_image(beautiful.bat_low)	
+				else
+					baticon:set_image(beautiful.bat)
+				end
+				widget:set_markup(string.format("%3d", math.ceil(bat_now.perc)) .. "% ")
+				return
 			end
 			-- We must be on AC
 			baticon:set_image(beautiful.ac)
@@ -302,10 +302,10 @@ local taglist_buttons = awful.util.table.join(
 	end),
 	awful.button({ }, 3, awful.tag.viewtoggle),
 	awful.button({ modkey }, 3, function(t)
-		if client.focus then
-			client.focus:toggle_tag(t)
-		end
-	end)
+	if client.focus then
+		client.focus:toggle_tag(t)
+	end
+end)
 )
 
 local tasklist_buttons = awful.util.table.join(
@@ -696,7 +696,6 @@ clientkeys = awful.util.table.join(
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
 	globalkeys = awful.util.table.join(globalkeys,
 				    -- View tag only.
@@ -781,7 +780,28 @@ awful.rules.rules = {
 		properties = {
 			placement = awful.placement.under_mouse+awful.placement.no_offscreen
 		}
-	}
+	},
+	{
+		rule_any = {
+			type = { "notification" },
+			name = { "Microsoft Teams Notification", "Slack | mini panel" },
+		},
+		properties = {
+			titlebars_enabled = false,
+			floating = true,
+			focus = false,
+			draw_backdrop = false,
+			skip_decoration = true,
+			skip_taskbar = true,
+			ontop = true,
+			sticky = true,
+			size_hints_honor = true,
+			maximized_horizontal = false,
+			maximized_vertical = false,
+			placement = awful.placement.top_right,
+			height = 10
+		}
+	},
 }
 -- }}}
 

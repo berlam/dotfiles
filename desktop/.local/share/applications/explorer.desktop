@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=File manager
 Comment=File manager
-Exec=sakura -d
+Exec=alacritty --working-directory
 Icon=
 Terminal=false
 Type=Application
