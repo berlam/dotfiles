@@ -11,8 +11,8 @@ xinput --list --name-only | egrep -i "Synaptics|TouchPad" | xargs -I{} -r xinput
 [ -x /usr/bin/nm-applet ] && nm-applet&
 #Start power manager
 [ -x /usr/bin/xfce4-power-manager ] && xfce4-power-manager&
-#Start compton
-[ -x /usr/bin/compton ] && compton&
+#Start picom
+[ -x /usr/bin/picom ] && picom&
 #Start unclutter
 [ -x /usr/bin/unclutter ] && unclutter \
 	-root \
